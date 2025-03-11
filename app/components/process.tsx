@@ -32,8 +32,8 @@ export function Process() {
 
     const options = {
       root: null,
-      rootMargin: "-40% 0px -40% 0px",
-      threshold: 0.6,
+      rootMargin: "-20% 0px -20% 0px",
+      threshold: 0.5,
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -42,11 +42,17 @@ export function Process() {
           const stepIndex = stepRefs.current.findIndex(ref => ref === entry.target)
           if (stepIndex !== -1) {
             setActiveStep(stepIndex + 1)
+            // Scroll the step into view with smooth behavior
+            entry.target.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            })
           }
         }
       })
     }, options)
 
+    // Observe each step
     stepRefs.current.forEach((ref) => {
       if (ref) observer.observe(ref)
     })
