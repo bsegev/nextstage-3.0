@@ -5,19 +5,54 @@ import {
   Code2, FileText, Play, Compass, Linkedin, Megaphone,
   Building2, ShoppingBag, Home, BadgeDollarSign, BrainCircuit, Music,
   Briefcase, Rocket, BarChart3, PenTool, Video, Instagram,
-  MessageSquare, Target, Zap, Share2, Database, ShieldCheck
+  MessageSquare, Target, Zap, Share2, Database, ShieldCheck,
+  Layout, Search, Lightbulb
 } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
 
+// Shared core services that can be used across industries
+const coreServices = {
+  website: {
+    icon: Globe,
+    title: "Website Development",
+    description: "Professional, high-converting websites tailored to your industry needs.",
+    color: "purple",
+  },
+  brand: {
+    icon: Palette,
+    title: "Brand Identity",
+    description: "Distinctive visual identity and messaging that makes your business instantly recognizable.",
+    color: "blue",
+  },
+  strategy: {
+    icon: Lightbulb,
+    title: "Growth Strategy",
+    description: "Data-driven strategies to reach and convert your target audience.",
+    color: "cyan",
+  },
+  content: {
+    icon: FileText,
+    title: "Content Strategy",
+    description: "Compelling content that communicates your value and engages your audience.",
+    color: "indigo",
+  }
+}
+
 const industries = [
   {
     id: "saas",
     label: "SaaS",
     icon: Rocket,
+    description: "Launch and scale your software product with confidence.",
     services: [
+      {
+        ...coreServices.website,
+        title: "Product Website",
+        description: "High-converting SaaS websites that showcase your product's value proposition.",
+      },
       {
         icon: Code2,
         title: "MVP Development",
@@ -25,21 +60,15 @@ const industries = [
         color: "blue",
       },
       {
-        icon: Presentation,
-        title: "Pitch Decks",
-        description: "Compelling pitch decks that help you raise capital and win over investors.",
-        color: "purple",
-      },
-      {
-        icon: Globe,
-        title: "Product Website",
-        description: "High-converting SaaS websites that showcase your product's value proposition.",
-        color: "cyan",
-      },
-      {
         icon: Database,
         title: "Product Analytics",
         description: "Data-driven insights to optimize your user acquisition and retention strategies.",
+        color: "cyan",
+      },
+      {
+        icon: Presentation,
+        title: "Pitch Decks",
+        description: "Compelling pitch decks that help you raise capital and win over investors.",
         color: "indigo",
       }
     ]
@@ -48,23 +77,21 @@ const industries = [
     id: "ecommerce",
     label: "E-Commerce",
     icon: ShoppingBag,
+    description: "Build a thriving online store that converts browsers into buyers.",
     services: [
       {
-        icon: Globe,
+        ...coreServices.website,
         title: "Store Design",
         description: "Beautiful, conversion-optimized online stores that drive sales.",
-        color: "purple",
+      },
+      {
+        ...coreServices.brand,
+        description: "Stand out in a crowded market with a memorable brand identity.",
       },
       {
         icon: Target,
         title: "Marketing Strategy",
         description: "Customer acquisition and retention strategies that grow your brand.",
-        color: "blue",
-      },
-      {
-        icon: Instagram,
-        title: "Social Media",
-        description: "Engaging social content that builds brand awareness and drives traffic.",
         color: "cyan",
       },
       {
@@ -79,23 +106,21 @@ const industries = [
     id: "real-estate",
     label: "Real Estate",
     icon: Home,
+    description: "Showcase properties and build trust with potential clients.",
     services: [
       {
-        icon: Globe,
+        ...coreServices.website,
         title: "Property Websites",
         description: "Stunning property showcase websites that attract qualified buyers.",
-        color: "purple",
+      },
+      {
+        ...coreServices.brand,
+        description: "Professional branding that builds trust with clients.",
       },
       {
         icon: Video,
         title: "Virtual Tours",
         description: "Immersive property tours that bring listings to life.",
-        color: "blue",
-      },
-      {
-        icon: PenTool,
-        title: "Brand Identity",
-        description: "Professional branding that builds trust with clients.",
         color: "cyan",
       },
       {
@@ -110,18 +135,17 @@ const industries = [
     id: "financial",
     label: "Financial",
     icon: BadgeDollarSign,
+    description: "Build trust and showcase expertise in financial services.",
     services: [
       {
-        icon: ShieldCheck,
-        title: "Trust Building",
+        ...coreServices.website,
+        title: "Trust-Building Website",
         description: "Professional web presence that establishes credibility and authority.",
-        color: "purple",
       },
       {
-        icon: Presentation,
-        title: "Client Decks",
-        description: "Persuasive presentation materials for client meetings and pitches.",
-        color: "blue",
+        ...coreServices.content,
+        title: "Financial Content",
+        description: "Clear, engaging content that builds trust and educates clients.",
       },
       {
         icon: BarChart3,
@@ -130,9 +154,9 @@ const industries = [
         color: "cyan",
       },
       {
-        icon: MessageSquare,
-        title: "Communication",
-        description: "Effective client communication strategies and materials.",
+        icon: Presentation,
+        title: "Client Decks",
+        description: "Persuasive presentation materials for client meetings and pitches.",
         color: "indigo",
       }
     ]
@@ -141,29 +165,27 @@ const industries = [
     id: "consulting",
     label: "Consulting",
     icon: BrainCircuit,
+    description: "Position yourself as the go-to expert in your field.",
     services: [
       {
-        icon: Globe,
+        ...coreServices.website,
         title: "Authority Website",
         description: "Professional web presence that positions you as an industry expert.",
-        color: "purple",
+      },
+      {
+        ...coreServices.content,
+        description: "Thought leadership content that showcases your expertise.",
       },
       {
         icon: FileText,
         title: "Case Studies",
         description: "Compelling case studies that showcase your impact and results.",
-        color: "blue",
+        color: "cyan",
       },
       {
         icon: Linkedin,
         title: "LinkedIn Strategy",
         description: "LinkedIn optimization to attract high-value clients.",
-        color: "cyan",
-      },
-      {
-        icon: Presentation,
-        title: "Sales Decks",
-        description: "Persuasive presentations that win new business.",
         color: "indigo",
       }
     ]
@@ -172,29 +194,28 @@ const industries = [
     id: "artists",
     label: "Artists",
     icon: Music,
+    description: "Share your art with the world and grow your audience.",
     services: [
       {
-        icon: Globe,
+        ...coreServices.website,
         title: "Artist Website",
         description: "Creative portfolios that showcase your work and attract opportunities.",
-        color: "purple",
+      },
+      {
+        ...coreServices.brand,
+        title: "Artist Brand",
+        description: "Develop a unique artistic identity that resonates with your audience.",
       },
       {
         icon: Play,
         title: "EPK & Media Kit",
         description: "Professional press kits that get you noticed by industry gatekeepers.",
-        color: "blue",
+        color: "cyan",
       },
       {
         icon: Instagram,
         title: "Social Strategy",
         description: "Engaging social presence that grows your audience.",
-        color: "cyan",
-      },
-      {
-        icon: Megaphone,
-        title: "Release Strategy",
-        description: "Strategic promotion plans for your releases and projects.",
         color: "indigo",
       }
     ]
@@ -233,6 +254,8 @@ export function Services() {
     }
   }
 
+  const activeIndustryData = industries.find(i => i.id === activeIndustry)
+
   return (
     <section ref={sectionRef} id="services" className="w-full py-12 md:py-24 bg-gradient-to-b from-white to-slate-50">
       <motion.div 
@@ -256,7 +279,7 @@ export function Services() {
         </div>
 
         {/* Industry Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {industries.map((industry) => {
             const Icon = industry.icon
             return (
@@ -265,7 +288,7 @@ export function Services() {
                 onClick={() => setActiveIndustry(industry.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeIndustry === industry.id
-                    ? 'bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white shadow-lg scale-105'
                     : 'bg-white hover:bg-slate-50 text-gray-600 hover:text-gray-900 border border-gray-200'
                 }`}
               >
@@ -276,9 +299,19 @@ export function Services() {
           })}
         </div>
 
+        {/* Industry Description */}
+        {activeIndustryData && (
+          <motion.div 
+            variants={cardVariants}
+            className="text-center mb-12"
+          >
+            <p className="text-lg text-muted-foreground">{activeIndustryData.description}</p>
+          </motion.div>
+        )}
+
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {industries.find(i => i.id === activeIndustry)?.services.map((service, index) => {
+          {activeIndustryData?.services.map((service, index) => {
             const Icon = service.icon
             const colorClass = service.color === "purple" ? "text-purple-600" 
               : service.color === "blue" ? "text-blue-600"
