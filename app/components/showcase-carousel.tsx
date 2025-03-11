@@ -188,6 +188,8 @@ export function ShowcaseCarousel() {
                   {index === 2 && (
                     <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Full Service Partnership</span>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Sales Coaching</span>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Onboarding Streamline</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Strategy</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Design System</span>
                     </>
