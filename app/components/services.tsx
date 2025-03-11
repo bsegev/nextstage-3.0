@@ -79,33 +79,63 @@ export function Services() {
                 className="group relative"
               >
                 <Link href={`/services/${service.id}`} className="block h-full">
-                  <div className="service-card bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 h-full flex flex-col justify-between">
-                    <div>
-                      <div className="mb-4 inline-flex items-center justify-center rounded-md p-2" 
-                           style={{
-                             backgroundColor: service.color === 'purple' 
-                               ? 'rgba(147, 51, 234, 0.1)' 
-                               : service.color === 'blue' 
-                                 ? 'rgba(59, 130, 246, 0.1)' 
-                                 : service.color === 'cyan' 
-                                   ? 'rgba(6, 182, 212, 0.1)' 
-                                   : 'rgba(99, 102, 241, 0.1)'
-                           }}>
-                        <Icon className="h-6 w-6" 
-                           style={{
-                             color: service.color === 'purple' 
-                               ? 'rgb(147, 51, 234)' 
-                               : service.color === 'blue' 
-                                 ? 'rgb(59, 130, 246)' 
-                                 : service.color === 'cyan' 
-                                   ? 'rgb(6, 182, 212)' 
-                                   : 'rgb(99, 102, 241)'
-                           }}/>
-                      </div>
-                      <h3 className="text-xl font-bold mb-2 font-serif">{service.title}</h3>
-                      <p className="text-muted-foreground">{service.description}</p>
+                  <div className="service-card bg-white rounded-lg p-0 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 h-full flex">
+                    <div className="flex items-center justify-center w-12 h-full flex-shrink-0" 
+                         style={{
+                           backgroundColor: 
+                             // Strategy services
+                             (service.id === "growth-strategy" || 
+                              service.id === "competitive-analysis" || 
+                              service.id === "user-research") 
+                               ? 'rgba(147, 51, 234, 0.1)' // Purple for Strategy
+                             // Design services  
+                             : (service.id === "brand-identity" || 
+                                service.id === "marketing-materials" || 
+                                service.id === "pitch-decks" || 
+                                service.id === "explainer-videos" || 
+                                service.id === "investor-materials") 
+                                 ? 'rgba(59, 130, 246, 0.1)' // Blue for Design
+                             // Tech services
+                             : (service.id === "website-development" || 
+                                service.id === "linkedin-optimization" || 
+                                service.id === "mvp-prototypes" || 
+                                service.id === "content-strategy") 
+                                 ? 'rgba(34, 211, 238, 0.1)' // Cyan for Tech
+                             : 'rgba(99, 102, 241, 0.1)' // Default fallback
+                         }}>
+                      <Icon className="h-6 w-6" 
+                         style={{
+                           color: 
+                             // Strategy services
+                             (service.id === "growth-strategy" || 
+                              service.id === "competitive-analysis" || 
+                              service.id === "user-research") 
+                               ? 'rgb(147, 51, 234)' // Purple for Strategy
+                             // Design services  
+                             : (service.id === "brand-identity" || 
+                                service.id === "marketing-materials" || 
+                                service.id === "pitch-decks" || 
+                                service.id === "explainer-videos" || 
+                                service.id === "investor-materials") 
+                                 ? 'rgb(59, 130, 246)' // Blue for Design
+                             // Tech services
+                             : (service.id === "website-development" || 
+                                service.id === "linkedin-optimization" || 
+                                service.id === "mvp-prototypes" || 
+                                service.id === "content-strategy") 
+                                 ? 'rgb(34, 211, 238)' // Cyan for Tech
+                             : 'rgb(99, 102, 241)' // Default fallback
+                         }}/>
                     </div>
-                    <div className="mt-4 text-sm font-medium text-blue-600 group-hover:underline">Learn more &rarr;</div>
+                    <div className="flex flex-col justify-between p-4 w-full">
+                      <div>
+                        <h3 className="text-base font-bold mb-1 font-serif">{service.title}</h3>
+                        <p className="text-muted-foreground text-sm line-clamp-2">{service.description}</p>
+                      </div>
+                      <div className="flex justify-end mt-3">
+                        <span className="text-xs font-medium text-blue-600 hover:underline">Learn more &rarr;</span>
+                      </div>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
