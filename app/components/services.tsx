@@ -3,7 +3,6 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import Link from "next/link"
-import * as LucideIcons from "lucide-react"
 import { servicesData } from "@/app/data/servicesData"
 import { getIconByName } from "@/app/utils/icon-map"
 import { ArrowRight } from "lucide-react"
