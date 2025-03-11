@@ -1,102 +1,209 @@
 "use client"
 
 import {
-  Presentation,
-  Users,
-  LineChart,
-  Globe,
-  ArrowRight,
-  Palette,
-  Code2,
-  FileText,
-  Play,
-  Compass,
-  Linkedin,
-  Megaphone,
-  BarChart3,
+  Presentation, Users, LineChart, Globe, ArrowRight, Palette,
+  Code2, FileText, Play, Compass, Linkedin, Megaphone,
+  Building2, ShoppingBag, Home, BadgeDollarSign, BrainCircuit, Music,
+  Briefcase, Rocket, BarChart3, PenTool, Video, Instagram,
+  MessageSquare, Target, Zap, Share2, Database, ShieldCheck
 } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
-const services = [
+const industries = [
   {
-    icon: Presentation,
-    title: "Pitch Decks",
-    description: "Narratives that grip and designs that dazzle, crafted to make your story unforgettable.",
-    color: "purple",
+    id: "saas",
+    label: "SaaS",
+    icon: Rocket,
+    services: [
+      {
+        icon: Code2,
+        title: "MVP Development",
+        description: "From concept to clickable prototype, built to validate your ideas and attract early adopters.",
+        color: "blue",
+      },
+      {
+        icon: Presentation,
+        title: "Pitch Decks",
+        description: "Compelling pitch decks that help you raise capital and win over investors.",
+        color: "purple",
+      },
+      {
+        icon: Globe,
+        title: "Product Website",
+        description: "High-converting SaaS websites that showcase your product's value proposition.",
+        color: "cyan",
+      },
+      {
+        icon: Database,
+        title: "Product Analytics",
+        description: "Data-driven insights to optimize your user acquisition and retention strategies.",
+        color: "indigo",
+      }
+    ]
   },
   {
-    icon: Code2,
-    title: "MVP Prototypes",
-    description: "From concept to clickable prototype, built to validate your ideas and attract early adopters.",
-    color: "blue",
+    id: "ecommerce",
+    label: "E-Commerce",
+    icon: ShoppingBag,
+    services: [
+      {
+        icon: Globe,
+        title: "Store Design",
+        description: "Beautiful, conversion-optimized online stores that drive sales.",
+        color: "purple",
+      },
+      {
+        icon: Target,
+        title: "Marketing Strategy",
+        description: "Customer acquisition and retention strategies that grow your brand.",
+        color: "blue",
+      },
+      {
+        icon: Instagram,
+        title: "Social Media",
+        description: "Engaging social content that builds brand awareness and drives traffic.",
+        color: "cyan",
+      },
+      {
+        icon: Share2,
+        title: "Email Marketing",
+        description: "Automated email campaigns that nurture leads and boost sales.",
+        color: "indigo",
+      }
+    ]
   },
   {
-    icon: Palette,
-    title: "Brand Identity",
-    description: "Distinctive visual identity and messaging that makes your business instantly recognizable.",
-    color: "cyan",
+    id: "real-estate",
+    label: "Real Estate",
+    icon: Home,
+    services: [
+      {
+        icon: Globe,
+        title: "Property Websites",
+        description: "Stunning property showcase websites that attract qualified buyers.",
+        color: "purple",
+      },
+      {
+        icon: Video,
+        title: "Virtual Tours",
+        description: "Immersive property tours that bring listings to life.",
+        color: "blue",
+      },
+      {
+        icon: PenTool,
+        title: "Brand Identity",
+        description: "Professional branding that builds trust with clients.",
+        color: "cyan",
+      },
+      {
+        icon: Linkedin,
+        title: "Agent Profiles",
+        description: "Optimized online presence to establish authority in your market.",
+        color: "indigo",
+      }
+    ]
   },
   {
-    icon: BarChart3,
-    title: "Growth Strategy",
-    description: "Data-driven roadmaps and market positioning that turn your vision into actionable growth plans.",
-    color: "indigo",
+    id: "financial",
+    label: "Financial",
+    icon: BadgeDollarSign,
+    services: [
+      {
+        icon: ShieldCheck,
+        title: "Trust Building",
+        description: "Professional web presence that establishes credibility and authority.",
+        color: "purple",
+      },
+      {
+        icon: Presentation,
+        title: "Client Decks",
+        description: "Persuasive presentation materials for client meetings and pitches.",
+        color: "blue",
+      },
+      {
+        icon: BarChart3,
+        title: "Performance Reports",
+        description: "Clear, engaging reports that communicate value to clients.",
+        color: "cyan",
+      },
+      {
+        icon: MessageSquare,
+        title: "Communication",
+        description: "Effective client communication strategies and materials.",
+        color: "indigo",
+      }
+    ]
   },
   {
-    icon: Globe,
-    title: "Website Development",
-    description: "Responsive, high-converting websites that showcase your brand and drive engagement.",
-    color: "cyan",
+    id: "consulting",
+    label: "Consulting",
+    icon: BrainCircuit,
+    services: [
+      {
+        icon: Globe,
+        title: "Authority Website",
+        description: "Professional web presence that positions you as an industry expert.",
+        color: "purple",
+      },
+      {
+        icon: FileText,
+        title: "Case Studies",
+        description: "Compelling case studies that showcase your impact and results.",
+        color: "blue",
+      },
+      {
+        icon: Linkedin,
+        title: "LinkedIn Strategy",
+        description: "LinkedIn optimization to attract high-value clients.",
+        color: "cyan",
+      },
+      {
+        icon: Presentation,
+        title: "Sales Decks",
+        description: "Persuasive presentations that win new business.",
+        color: "indigo",
+      }
+    ]
   },
   {
-    icon: Users,
-    title: "User Research",
-    description: "Customer insights and market validation that ensure your product resonates.",
-    color: "purple",
-  },
-  {
-    icon: LineChart,
-    title: "Investor Materials",
-    description: "Comprehensive fundraising collateral that tells your story and showcases your potential.",
-    color: "blue",
-  },
-  {
-    icon: FileText,
-    title: "Content Strategy",
-    description: "Compelling messaging and content plans that communicate your value proposition clearly.",
-    color: "indigo",
-  },
-  {
-    icon: Play,
-    title: "Explainer Videos",
-    description: "Engaging motion graphics and animations that simplify complex ideas and captivate your audience.",
-    color: "purple",
-  },
-  {
-    icon: Compass,
-    title: "Competitive Analysis",
-    description: "Deep market research that identifies opportunities and positions you for success.",
-    color: "blue",
-  },
-  {
-    icon: Linkedin,
-    title: "LinkedIn Optimization",
-    description: "Strategic profile and content optimization to build authority and attract opportunities.",
-    color: "cyan",
-  },
-  {
-    icon: Megaphone,
-    title: "Marketing Materials",
-    description: "Cohesive marketing assets that amplify your message and drive customer acquisition.",
-    color: "indigo",
-  },
+    id: "artists",
+    label: "Artists",
+    icon: Music,
+    services: [
+      {
+        icon: Globe,
+        title: "Artist Website",
+        description: "Creative portfolios that showcase your work and attract opportunities.",
+        color: "purple",
+      },
+      {
+        icon: Play,
+        title: "EPK & Media Kit",
+        description: "Professional press kits that get you noticed by industry gatekeepers.",
+        color: "blue",
+      },
+      {
+        icon: Instagram,
+        title: "Social Strategy",
+        description: "Engaging social presence that grows your audience.",
+        color: "cyan",
+      },
+      {
+        icon: Megaphone,
+        title: "Release Strategy",
+        description: "Strategic promotion plans for your releases and projects.",
+        color: "indigo",
+      }
+    ]
+  }
 ]
 
 export function Services() {
-  const sectionRef = useRef(null)
+  const [activeIndustry, setActiveIndustry] = useState<string>(industries[0].id)
+  const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { 
     amount: "some", 
     margin: "0px 0px -20% 0px",
@@ -140,16 +247,39 @@ export function Services() {
               What NextStage Builds For You
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif overflow-visible">
-              Whether you&apos;re preparing to <span className="animated-gradient">secure funding</span>, attract
-              customers, or launch your next big idea
+              Find the perfect solution for your <span className="animated-gradient">industry</span>
             </h2>
             <p className="text-muted-foreground md:text-lg">
-              I&apos;ll help you create assets that resonate and strategies that stick.
+              Select your industry to see how we can help you achieve your goals.
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
-          {services.map((service, index) => {
+
+        {/* Industry Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {industries.map((industry) => {
+            const Icon = industry.icon
+            return (
+              <button
+                key={industry.id}
+                onClick={() => setActiveIndustry(industry.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeIndustry === industry.id
+                    ? 'bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white shadow-lg'
+                    : 'bg-white hover:bg-slate-50 text-gray-600 hover:text-gray-900 border border-gray-200'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {industry.label}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {industries.find(i => i.id === activeIndustry)?.services.map((service, index) => {
+            const Icon = service.icon
             const colorClass = service.color === "purple" ? "text-purple-600" 
               : service.color === "blue" ? "text-blue-600"
               : service.color === "cyan" ? "text-cyan-600"
@@ -159,13 +289,13 @@ export function Services() {
                 key={index}
                 variants={cardVariants}
                 custom={index}
-                className="group relative overflow-hidden rounded-lg bg-white p-5 shadow-md transition-all hover:shadow-lg"
+                className="group relative overflow-hidden rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg"
                 style={{ willChange: "opacity, transform" }}
               >
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10">
-                      <service.icon className={`h-7 w-7 ${colorClass}`} />
+                      <Icon className={`h-7 w-7 ${colorClass}`} />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -180,26 +310,21 @@ export function Services() {
               </motion.div>
             )
           })}
-          <motion.div 
-            variants={cardVariants}
-            className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-600/[0.04] via-blue-500/[0.04] to-cyan-400/[0.04] p-8 md:p-10 col-span-full lg:col-span-3 flex items-center justify-center hover:from-purple-600/[0.08] hover:via-blue-500/[0.08] hover:to-cyan-400/[0.08] transition-all duration-300"
-            style={{ willChange: "opacity, transform" }}
-          >
-            <div className="text-center">
-              <p className="text-2xl font-serif mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">And More...</p>
-              <p className="text-[15px] text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Every business is unique. Let&apos;s discuss your specific needs and craft a custom solution that drives results.
-              </p>
-              <Link 
-                href="#contact"
-                className="inline-flex items-center justify-center space-x-2 mt-5 px-6 py-2.5 text-[13px] font-medium border rounded-xl border-purple-600/20 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.08] via-blue-500/[0.08] to-cyan-400/[0.08] hover:from-purple-600 hover:via-blue-500 hover:to-cyan-400 hover:text-white transition-all duration-300 group"
-              >
-                <span>Schedule a consultation</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-150" />
-              </Link>
-            </div>
-          </motion.div>
         </div>
+
+        {/* Contact CTA */}
+        <motion.div 
+          variants={cardVariants}
+          className="mt-12 text-center"
+        >
+          <Link 
+            href="#contact"
+            className="inline-flex items-center justify-center space-x-2 px-6 py-3 text-sm font-medium border rounded-xl border-purple-600/20 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.08] via-blue-500/[0.08] to-cyan-400/[0.08] hover:from-purple-600 hover:via-blue-500 hover:to-cyan-400 hover:text-white transition-all duration-300 group"
+          >
+            <span>Get Started With Your Industry Solution</span>
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-150" />
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   )
