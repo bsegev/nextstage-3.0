@@ -97,39 +97,31 @@ const services = [
 
 export function Services() {
   const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { amount: 0.3, once: true })
+  const isInView = useInView(sectionRef, { 
+    amount: "some", 
+    margin: "0px 0px -20% 0px",
+    once: true 
+  })
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  }
-
-  const headerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.4,
+        ease: "easeOut"
       }
     }
   }
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.3,
+        ease: "easeOut"
       }
     }
   }
@@ -142,10 +134,7 @@ export function Services() {
         animate={isInView ? "visible" : "hidden"}
         variants={containerVariants}
       >
-        <motion.div 
-          className="flex flex-col items-center justify-center space-y-4 text-center mb-12"
-          variants={headerVariants}
-        >
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2 max-w-3xl">
             <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm">
               What NextStage Builds For You
@@ -158,15 +147,20 @@ export function Services() {
               I&apos;ll help you create assets that resonate and strategies that stick.
             </p>
           </div>
-        </motion.div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
           {services.map((service, index) => {
-            const colorClass = `text-${service.color}-${service.color === "indigo" ? "500" : "600"}`
+            const colorClass = service.color === "purple" ? "text-purple-600" 
+              : service.color === "blue" ? "text-blue-600"
+              : service.color === "cyan" ? "text-cyan-600"
+              : "text-indigo-500"
             return (
               <motion.div
                 key={index}
                 variants={cardVariants}
+                custom={index}
                 className="group relative overflow-hidden rounded-lg bg-white p-5 shadow-md transition-all hover:shadow-lg"
+                style={{ willChange: "opacity, transform" }}
               >
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
@@ -189,6 +183,7 @@ export function Services() {
           <motion.div 
             variants={cardVariants}
             className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-600/[0.04] via-blue-500/[0.04] to-cyan-400/[0.04] p-8 md:p-10 col-span-full lg:col-span-3 flex items-center justify-center hover:from-purple-600/[0.08] hover:via-blue-500/[0.08] hover:to-cyan-400/[0.08] transition-all duration-300"
+            style={{ willChange: "opacity, transform" }}
           >
             <div className="text-center">
               <p className="text-2xl font-serif mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">And More...</p>
@@ -208,4 +203,4 @@ export function Services() {
       </motion.div>
     </section>
   )
-} 
+}
