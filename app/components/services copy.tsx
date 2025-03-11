@@ -22,10 +22,16 @@ import { useRef } from "react"
 
 const services = [
   {
-    icon: Globe,
-    title: "Website Development",
-    description: "Responsive, high-converting websites that showcase your brand and drive engagement.",
-    color: "cyan",
+    icon: Presentation,
+    title: "Pitch Decks",
+    description: "Narratives that grip and designs that dazzle, crafted to make your story unforgettable.",
+    color: "purple",
+  },
+  {
+    icon: Code2,
+    title: "MVP Prototypes",
+    description: "From concept to clickable prototype, built to validate your ideas and attract early adopters.",
+    color: "blue",
   },
   {
     icon: Palette,
@@ -34,10 +40,46 @@ const services = [
     color: "cyan",
   },
   {
+    icon: BarChart3,
+    title: "Growth Strategy",
+    description: "Data-driven roadmaps and market positioning that turn your vision into actionable growth plans.",
+    color: "indigo",
+  },
+  {
+    icon: Globe,
+    title: "Website Development",
+    description: "Responsive, high-converting websites that showcase your brand and drive engagement.",
+    color: "cyan",
+  },
+  {
+    icon: Users,
+    title: "User Research",
+    description: "Customer insights and market validation that ensure your product resonates.",
+    color: "purple",
+  },
+  {
+    icon: LineChart,
+    title: "Investor Materials",
+    description: "Comprehensive fundraising collateral that tells your story and showcases your potential.",
+    color: "blue",
+  },
+  {
     icon: FileText,
     title: "Content Strategy",
     description: "Compelling messaging and content plans that communicate your value proposition clearly.",
     color: "indigo",
+  },
+  {
+    icon: Play,
+    title: "Explainer Videos",
+    description: "Engaging motion graphics and animations that simplify complex ideas and captivate your audience.",
+    color: "purple",
+  },
+  {
+    icon: Compass,
+    title: "Competitive Analysis",
+    description: "Deep market research that identifies opportunities and positions you for success.",
+    color: "blue",
   },
   {
     icon: Linkedin,
@@ -50,48 +92,6 @@ const services = [
     title: "Marketing Materials",
     description: "Cohesive marketing assets that amplify your message and drive customer acquisition.",
     color: "indigo",
-  },
-  {
-    icon: Users,
-    title: "User Research",
-    description: "Customer insights and market validation that ensure your product resonates.",
-    color: "purple",
-  },
-  {
-    icon: Compass,
-    title: "Competitive Analysis",
-    description: "Deep market research that identifies opportunities and positions you for success.",
-    color: "blue",
-  },
-  {
-    icon: BarChart3,
-    title: "Growth Strategy",
-    description: "Data-driven roadmaps and market positioning that turn your vision into actionable growth plans.",
-    color: "indigo",
-  },
-  {
-    icon: Code2,
-    title: "MVP Prototypes",
-    description: "From concept to clickable prototype, built to validate your ideas and attract early adopters.",
-    color: "blue",
-  },
-  {
-    icon: Play,
-    title: "Explainer Videos",
-    description: "Engaging motion graphics and animations that simplify complex ideas and captivate your audience.",
-    color: "purple",
-  },
-  {
-    icon: Presentation,
-    title: "Pitch Decks",
-    description: "Narratives that grip and designs that dazzle, crafted to make your story unforgettable.",
-    color: "purple",
-  },
-  {
-    icon: LineChart,
-    title: "Investor Materials",
-    description: "Comprehensive fundraising collateral that tells your story and showcases your potential.",
-    color: "blue",
   },
 ]
 

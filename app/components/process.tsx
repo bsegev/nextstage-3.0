@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 
 export function Process() {
