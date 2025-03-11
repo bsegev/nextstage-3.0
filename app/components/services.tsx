@@ -78,7 +78,7 @@ const services = [
   {
     icon: Play,
     title: "Explainer Videos",
-    description: "Engaging motion graphics and animations that simplify complex ideas and captivate your audience.",
+    description: "Engaging animated videos that simplify complex ideas and captivate your audience.",
     color: "purple",
   },
   {
