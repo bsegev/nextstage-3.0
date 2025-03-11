@@ -3,8 +3,10 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import Link from "next/link"
+import * as LucideIcons from "lucide-react"
 import { servicesData } from "@/app/data/servicesData"
 import { getIconByName } from "@/app/utils/icon-map"
+import { ArrowRight } from "lucide-react"
 
 export function Services() {
   const sectionRef = useRef(null)
@@ -48,13 +50,13 @@ export function Services() {
         >
           <div className="space-y-2 max-w-3xl">
             <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm">
-              What We Offer
+              What NextStage Builds For You
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
-              Our <span className="animated-gradient">Services</span>
+              Whether you&apos;re preparing to <span className="animated-gradient">secure funding</span>, attract customers, or launch your next big idea
             </h2>
             <p className="text-muted-foreground md:text-xl">
-              From strategy to execution, we provide all the tools you need to build a thriving business.
+              I&apos;ll help you create assets that resonate and strategies that stick.
             </p>
           </div>
         </motion.div>
@@ -110,6 +112,27 @@ export function Services() {
               </motion.div>
             );
           })}
+          
+          {/* "And More" Card */}
+          <motion.div 
+            variants={itemVariants}
+            className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-600/[0.04] via-blue-500/[0.04] to-cyan-400/[0.04] p-8 md:p-10 col-span-full sm:col-span-2 lg:col-span-3 xl:col-span-4 flex items-center justify-center hover:from-purple-600/[0.08] hover:via-blue-500/[0.08] hover:to-cyan-400/[0.08] transition-all duration-300"
+            style={{ willChange: "opacity, transform" }}
+          >
+            <div className="text-center">
+              <p className="text-2xl font-serif mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">And More...</p>
+              <p className="text-[15px] text-muted-foreground max-w-md mx-auto leading-relaxed">
+                Every business is unique. Let&apos;s discuss your specific needs and craft a custom solution that drives results.
+              </p>
+              <Link 
+                href="#contact"
+                className="inline-flex items-center justify-center space-x-2 mt-5 px-6 py-2.5 text-[13px] font-medium border rounded-xl border-purple-600/20 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.08] via-blue-500/[0.08] to-cyan-400/[0.08] hover:from-purple-600 hover:via-blue-500 hover:to-cyan-400 hover:text-white transition-all duration-300 group"
+              >
+                <span>Schedule a consultation</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-150" />
+              </Link>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
