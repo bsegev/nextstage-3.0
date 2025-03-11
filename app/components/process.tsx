@@ -6,10 +6,36 @@ import { motion, useInView } from "framer-motion"
 export function Process() {
   const [activeStep, setActiveStep] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
+  const [showIndicator, setShowIndicator] = useState(false)
+  const indicatorTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef(null)
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(sectionRef, { amount: 0.3, once: true })
+
+  // Reset indicator timeout when step changes
+  useEffect(() => {
+    if (!isMobile) return
+    
+    // Clear any existing timeout
+    if (indicatorTimeoutRef.current) {
+      clearTimeout(indicatorTimeoutRef.current)
+    }
+    
+    // Show the indicator
+    setShowIndicator(true)
+    
+    // Hide after 2 seconds
+    indicatorTimeoutRef.current = setTimeout(() => {
+      setShowIndicator(false)
+    }, 2000)
+    
+    return () => {
+      if (indicatorTimeoutRef.current) {
+        clearTimeout(indicatorTimeoutRef.current)
+      }
+    }
+  }, [activeStep, isMobile])
 
   // Check if device is mobile
   useEffect(() => {
@@ -26,7 +52,7 @@ export function Process() {
     }
   }, [])
 
-  // Set up intersection observers for mobile
+  // Set up intersection observers for mobile steps
   useEffect(() => {
     if (!isMobile) return
 
@@ -42,17 +68,11 @@ export function Process() {
           const stepIndex = stepRefs.current.findIndex(ref => ref === entry.target)
           if (stepIndex !== -1) {
             setActiveStep(stepIndex + 1)
-            // Scroll the step into view with smooth behavior
-            entry.target.scrollIntoView({
-              behavior: "smooth",
-              block: "center"
-            })
           }
         }
       })
     }, options)
 
-    // Observe each step
     stepRefs.current.forEach((ref) => {
       if (ref) observer.observe(ref)
     })
@@ -178,14 +198,22 @@ export function Process() {
         {/* Mobile progress indicator */}
         {isMobile && (
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: showIndicator ? 1 : 0,
+              y: showIndicator ? 0 : 20,
+              transition: { 
+                duration: 0.3,
+                ease: "easeOut"
+              }
+            }}
+            className="fixed inset-x-0 bottom-6 z-50 flex justify-center pointer-events-none"
           >
-            <div className="flex items-center space-x-2 text-sm">
-              <div className="w-1 h-1 rounded-full bg-purple-600"></div>
-              <span className="text-gray-600">Step {activeStep} of {processSteps.length}</span>
+            <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50">
+              <div className="flex items-center space-x-2 text-sm whitespace-nowrap">
+                <div className="w-1 h-1 rounded-full bg-purple-600"></div>
+                <span className="text-gray-600">Step {activeStep} of {processSteps.length}</span>
+              </div>
             </div>
           </motion.div>
         )}
