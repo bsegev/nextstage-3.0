@@ -9,6 +9,7 @@ export function Process() {
   const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef(null)
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(sectionRef, { amount: 0.3, once: true })
 
   // Check if device is mobile
@@ -26,23 +27,33 @@ export function Process() {
     }
   }, [])
 
-  // Handle mobile swipe navigation
-  const navigateToStep = (stepNumber: number) => {
-    if (stepNumber < 1 || stepNumber > processSteps.length) return
-    
-    setActiveStep(stepNumber)
-    
-    if (containerRef.current && isMobile) {
-      const steps = containerRef.current.querySelectorAll(".process-step")
-      if (steps[stepNumber - 1]) {
-        steps[stepNumber - 1].scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center"
-        })
-      }
+  // Set up intersection observers for mobile
+  useEffect(() => {
+    if (!isMobile) return
+
+    const options = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px",
+      threshold: 0.6,
     }
-  }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const stepIndex = stepRefs.current.findIndex(ref => ref === entry.target)
+          if (stepIndex !== -1) {
+            setActiveStep(stepIndex + 1)
+          }
+        }
+      })
+    }, options)
+
+    stepRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref)
+    })
+
+    return () => observer.disconnect()
+  }, [isMobile])
 
   const processSteps = [
     {
@@ -100,43 +111,14 @@ export function Process() {
           </div>
         </motion.div>
 
-        {/* Mobile navigation controls */}
-        {isMobile && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex justify-between items-center mb-4"
-          >
-            <button 
-              onClick={() => navigateToStep(activeStep - 1)}
-              className={`p-2 rounded-full ${activeStep <= 1 ? 'text-gray-300' : 'text-gray-700'}`}
-              disabled={activeStep <= 1}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            
-            <div className="text-sm font-medium">
-              Step {activeStep} of {processSteps.length}
-            </div>
-            
-            <button 
-              onClick={() => navigateToStep(activeStep + 1)}
-              className={`p-2 rounded-full ${activeStep >= processSteps.length ? 'text-gray-300' : 'text-gray-700'}`}
-              disabled={activeStep >= processSteps.length}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-          </motion.div>
-        )}
-
         <div 
           ref={containerRef}
-          className={`process-container relative ${isMobile ? 'snap-x snap-mandatory' : ''}`}
+          className={`process-container relative ${isMobile ? 'space-y-6' : ''}`}
         >
           {processSteps.map((step, index) => (
             <motion.div
               key={step.number}
+              ref={(el) => { stepRefs.current[index] = el }}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { 
                 opacity: 1, 
@@ -148,20 +130,28 @@ export function Process() {
                 }
               } : { opacity: 0, y: 20 }}
               className={`process-step ${activeStep === index + 1 ? "active" : ""}`}
-              onClick={() => isMobile ? navigateToStep(index + 1) : setActiveStep(index + 1)}
               onMouseEnter={() => !isMobile && setActiveStep(index + 1)}
             >
-              <div className={`process-step-inner relative z-10 rounded-lg p-6 transition-all duration-300 ${
+              <div className={`process-step-inner relative z-10 rounded-lg p-6 transition-all duration-500 ${
                 activeStep === index + 1 
                   ? "bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 shadow-lg" 
                   : "bg-white hover:bg-slate-50"
               }`}>
                 <div className="process-number font-serif text-4xl font-bold text-purple-600">{step.number}</div>
-                <div className={`process-content pl-8 ${activeStep === index + 1 ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 lg:group-hover:opacity-100 lg:group-hover:max-h-[500px]'}`}>
+                <motion.div 
+                  className="process-content pl-8"
+                  initial={false}
+                  animate={{ 
+                    opacity: activeStep === index + 1 ? 1 : 0,
+                    height: activeStep === index + 1 ? "auto" : "0px",
+                    marginTop: activeStep === index + 1 ? "1rem" : "0rem"
+                  }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <h3 className="text-xl font-bold font-serif">{step.title}</h3>
                   <div className="process-divider"></div>
                   <p className="text-muted-foreground mt-4">{step.description}</p>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -176,30 +166,22 @@ export function Process() {
                 ease: [0.22, 1, 0.36, 1]
               }
             } : { scaleY: 0 }}
-            className="absolute left-[2.5rem] top-0 bottom-0 w-px bg-gray-200 -z-10 origin-top"
+            className="absolute left-[2.5rem] top-0 bottom-0 w-px bg-gray-200 -z-10 origin-top hidden md:block"
           />
         </div>
 
-        {/* Mobile pagination indicators */}
+        {/* Mobile progress indicator */}
         {isMobile && (
           <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex justify-center space-x-2 mt-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50"
           >
-            {processSteps.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => navigateToStep(index + 1)}
-                className={`w-2.5 h-2.5 rounded-full ${
-                  activeStep === index + 1 
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-500' 
-                    : 'bg-gray-200'
-                }`}
-                aria-label={`Go to step ${index + 1}`}
-              />
-            ))}
+            <div className="flex items-center space-x-2 text-sm">
+              <div className="w-1 h-1 rounded-full bg-purple-600"></div>
+              <span className="text-gray-600">Step {activeStep} of {processSteps.length}</span>
+            </div>
           </motion.div>
         )}
       </div>
