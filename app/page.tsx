@@ -1,28 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import {
-  ArrowRight,
-  CheckCircle,
-  Sparkles,
-  Target,
-  Zap,
-  Users,
-  Palette,
-  BarChart3,
-  Presentation,
-  Code2,
-  LineChart,
-  Globe,
-  FileText,
-  DollarSign,
-  Compass,
-  Rocket,
-  Megaphone,
-} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import SynergyDiagram from "./components/synergy-diagram"
 import { Header } from "./components/header"
 import { Hero } from "./components/hero"
@@ -56,7 +35,7 @@ export default function HomePage() {
                   Get Started Today
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
-                  Let's <span className="animated-gradient">create</span> what your business needs to grow
+                  Let&apos;s <span className="animated-gradient">create</span> what your business needs to grow
                 </h2>
                 <p className="text-muted-foreground md:text-lg">
                   I work with a limited number of clients to ensure quality. Current availability:{" "}
@@ -69,7 +48,7 @@ export default function HomePage() {
                     Schedule a <span className="animated-gradient">Consultation</span>
                   </h3>
                   <p className="text-muted-foreground">
-                    Fill out the form below and I'll get back to you within 24 hours.
+                    Fill out the form below and I&apos;ll get back to you within 24 hours.
                   </p>
                 </div>
                 <div className="grid gap-4">

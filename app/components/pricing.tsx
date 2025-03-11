@@ -1,6 +1,4 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 

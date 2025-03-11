@@ -105,30 +105,6 @@ export default function SynergyDiagram() {
 
   const activeDetails = getActiveDetails()
 
-  const circles = [
-    {
-      id: "strategy",
-      title: "Strategy",
-      icon: Zap,
-      description: "Data-driven market analysis and growth planning to position your startup for success in competitive markets.",
-      color: "from-purple-600 to-purple-400",
-    },
-    {
-      id: "design",
-      title: "Design",
-      icon: Palette,
-      description: "Human-centered design approach that creates memorable brand experiences and intuitive user interfaces.",
-      color: "from-blue-500 to-blue-400",
-    },
-    {
-      id: "technology",
-      title: "Technology",
-      icon: Code2,
-      description: "Modern tech stack implementation with AI integration to build scalable, future-proof solutions.",
-      color: "from-cyan-400 to-cyan-300",
-    },
-  ]
-
   return (
     <section ref={sectionRef} className="w-full py-24 bg-white relative overflow-hidden">
       <motion.div 

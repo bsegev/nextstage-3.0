@@ -41,7 +41,7 @@ export function Testimonials() {
           <Card className="border-none shadow-md bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5">
             <CardContent className="pt-6">
               <blockquote className="text-lg text-gray-600 leading-relaxed text-center">
-                After a quick audit, Ben immediately understood our market challenges and created assets that actually drive business results. One of them was an explainer video that's become the most powerful conversion tool in our outreach. It has 4,000+ YT views and is consistently turning prospects into users. A game-changer for us.
+                After a quick audit, Ben immediately understood our market challenges and created assets that actually drive business results. One of them was an explainer video that&apos;s become the most powerful conversion tool in our outreach. It has 4,000+ YT views and is consistently turning prospects into users. A game-changer for us.
               </blockquote>
               <div className="mt-6 text-center">
                 <p className="font-semibold">Samuel F.</p>
@@ -53,7 +53,7 @@ export function Testimonials() {
           <Card className="border-none shadow-md bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5">
             <CardContent className="pt-6">
               <blockquote className="text-lg text-gray-600 leading-relaxed text-center">
-                Our rebrand was long overdue, so we needed to make quick moves. In just a month, Ben gave ECCAN a fresh digital presence that reflects who we are. He didn't just redesign a website, he helped us rethink how we show up. Strategy, sales, marketing, he touched on all of it.
+                Our rebrand was long overdue, so we needed to make quick moves. In just a month, Ben gave ECCAN a fresh digital presence that reflects who we are. He didn&apos;t just redesign a website, he helped us rethink how we show up. Strategy, sales, marketing, he touched on all of it.
               </blockquote>
               <div className="mt-6 text-center">
                 <p className="font-semibold">Jared T.</p>

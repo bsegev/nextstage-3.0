@@ -151,11 +151,11 @@ export function Services() {
               What NextStage Builds For You
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif overflow-visible">
-              Whether you're preparing to <span className="animated-gradient">secure funding</span>, attract
+              Whether you&apos;re preparing to <span className="animated-gradient">secure funding</span>, attract
               customers, or launch your next big idea
             </h2>
             <p className="text-muted-foreground md:text-lg">
-              I'll help you create assets that resonate and strategies that stick.
+              I&apos;ll help you create assets that resonate and strategies that stick.
             </p>
           </div>
         </motion.div>
@@ -193,7 +193,7 @@ export function Services() {
             <div className="text-center">
               <p className="text-2xl font-serif mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">And More...</p>
               <p className="text-[15px] text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Every business is unique. Let's discuss your specific needs and craft a custom solution that drives results.
+                Every business is unique. Let&apos;s discuss your specific needs and craft a custom solution that drives results.
               </p>
               <Link 
                 href="#contact"
