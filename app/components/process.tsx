@@ -1,17 +1,20 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, TouchEvent } from "react"
 import { motion, useInView } from "framer-motion"
 
 export function Process() {
   const [activeStep, setActiveStep] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
   const [showIndicator, setShowIndicator] = useState(false)
+  const [showSwipeHint, setShowSwipeHint] = useState(false)
   const indicatorTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
+  const swipeHintTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef(null)
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
   const isInView = useInView(sectionRef, { amount: 0.3, once: true })
+  const touchStartY = useRef<number | null>(null)
 
   // Reset indicator timeout when step changes
   useEffect(() => {
@@ -58,8 +61,8 @@ export function Process() {
 
     const options = {
       root: null,
-      rootMargin: "-20% 0px -20% 0px",
-      threshold: 0.5,
+      rootMargin: "0px",
+      threshold: 0.6,
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -68,6 +71,12 @@ export function Process() {
           const stepIndex = stepRefs.current.findIndex(ref => ref === entry.target)
           if (stepIndex !== -1) {
             setActiveStep(stepIndex + 1)
+            
+            // Smooth scroll to the active step
+            entry.target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
           }
         }
       })
@@ -79,6 +88,68 @@ export function Process() {
 
     return () => observer.disconnect()
   }, [isMobile])
+
+  // Show swipe hint when section comes into view on mobile
+  useEffect(() => {
+    if (isInView && isMobile) {
+      // Show swipe hint after a short delay
+      swipeHintTimeoutRef.current = setTimeout(() => {
+        setShowSwipeHint(true)
+        
+        // Hide swipe hint after 3 seconds
+        swipeHintTimeoutRef.current = setTimeout(() => {
+          setShowSwipeHint(false)
+        }, 3000)
+      }, 1000)
+    }
+    
+    return () => {
+      if (swipeHintTimeoutRef.current) {
+        clearTimeout(swipeHintTimeoutRef.current)
+      }
+    }
+  }, [isInView, isMobile])
+
+  // Handle touch events for swiping
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    if (!isMobile) return
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    if (!isMobile || touchStartY.current === null) return
+    
+    const touchEndY = e.changedTouches[0].clientY
+    const diff = touchStartY.current - touchEndY
+    const threshold = 50 // Minimum swipe distance to trigger navigation
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && activeStep < processSteps.length) {
+        // Swiped up - go to next step
+        navigateToStep(activeStep + 1)
+      } else if (diff < 0 && activeStep > 1) {
+        // Swiped down - go to previous step
+        navigateToStep(activeStep - 1)
+      }
+    }
+    
+    touchStartY.current = null
+  }
+
+  // Navigate to a specific step
+  const navigateToStep = (stepNumber: number) => {
+    if (stepNumber < 1 || stepNumber > processSteps.length) return
+    
+    setActiveStep(stepNumber)
+    const targetStep = stepRefs.current[stepNumber - 1]
+    
+    if (targetStep) {
+      targetStep.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+    }
+  }
 
   const processSteps = [
     {
@@ -138,7 +209,10 @@ export function Process() {
 
         <div 
           ref={containerRef}
-          className={`process-container relative ${isMobile ? 'space-y-6' : ''}`}
+          className={`process-container relative ${isMobile ? 'space-y-6 overflow-y-auto scroll-smooth snap-y snap-mandatory' : ''}`}
+          style={isMobile ? { scrollSnapType: 'y mandatory', height: 'calc(100vh - 200px)', overflowY: 'auto', paddingBottom: '2rem' } : {}}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {processSteps.map((step, index) => (
             <motion.div
@@ -154,14 +228,14 @@ export function Process() {
                   ease: [0.22, 1, 0.36, 1]
                 }
               } : { opacity: 0, y: 20 }}
-              className={`process-step ${activeStep === index + 1 ? "active" : ""}`}
+              className={`process-step ${activeStep === index + 1 ? "active" : ""} ${isMobile ? 'snap-start snap-always min-h-[80vh] flex items-center' : ''}`}
               onMouseEnter={() => !isMobile && setActiveStep(index + 1)}
             >
               <div className={`process-step-inner relative z-10 rounded-lg p-6 transition-all duration-500 ${
                 activeStep === index + 1 
                   ? "bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 shadow-lg" 
                   : "bg-white hover:bg-slate-50"
-              }`}>
+              } ${isMobile ? 'w-full' : ''}`}>
                 <div className="process-number font-serif text-4xl font-bold text-purple-600">{step.number}</div>
                 <motion.div 
                   className="process-content pl-8"
@@ -195,7 +269,53 @@ export function Process() {
           />
         </div>
 
-        {/* Mobile progress indicator */}
+        {/* Swipe hint for mobile */}
+        {isMobile && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: showSwipeHint ? 1 : 0,
+              transition: { duration: 0.3 }
+            }}
+            className="fixed inset-x-0 top-1/2 z-50 flex justify-center pointer-events-none"
+          >
+            <div className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-gray-200/50 text-center">
+              <div className="flex flex-col items-center space-y-2">
+                <div className="text-gray-600 text-sm font-medium">Swipe to navigate</div>
+                <div className="flex items-center justify-center space-x-2">
+                  <motion.div 
+                    animate={{ 
+                      y: [0, -8, 0],
+                      transition: { 
+                        repeat: Infinity, 
+                        duration: 1.5,
+                        repeatType: "loop"
+                      }
+                    }}
+                    className="text-purple-600 text-lg"
+                  >
+                    ↑
+                  </motion.div>
+                  <motion.div 
+                    animate={{ 
+                      y: [0, 8, 0],
+                      transition: { 
+                        repeat: Infinity, 
+                        duration: 1.5,
+                        repeatType: "loop"
+                      }
+                    }}
+                    className="text-purple-600 text-lg"
+                  >
+                    ↓
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Mobile progress indicator with navigation buttons */}
         {isMobile && (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -209,10 +329,26 @@ export function Process() {
             }}
             className="fixed inset-x-0 bottom-6 z-50 flex justify-center pointer-events-none"
           >
-            <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50">
-              <div className="flex items-center space-x-2 text-sm whitespace-nowrap">
-                <div className="w-1 h-1 rounded-full bg-purple-600"></div>
-                <span className="text-gray-600">Step {activeStep} of {processSteps.length}</span>
+            <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50 pointer-events-auto">
+              <div className="flex items-center space-x-4 text-sm whitespace-nowrap">
+                <button 
+                  onClick={() => navigateToStep(activeStep - 1)} 
+                  disabled={activeStep === 1}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center ${activeStep === 1 ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  ←
+                </button>
+                <div className="flex items-center space-x-2">
+                  <div className="w-1 h-1 rounded-full bg-purple-600"></div>
+                  <span className="text-gray-600">Step {activeStep} of {processSteps.length}</span>
+                </div>
+                <button 
+                  onClick={() => navigateToStep(activeStep + 1)} 
+                  disabled={activeStep === processSteps.length}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center ${activeStep === processSteps.length ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  →
+                </button>
               </div>
             </div>
           </motion.div>
