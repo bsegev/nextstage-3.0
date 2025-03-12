@@ -87,8 +87,8 @@ export function DesignImpact() {
           >
             <h3 className="text-lg font-bold tracking-tight text-center mb-3">THE REALITY</h3>
             <p className="text-center text-gray-700 md:text-lg">
-              In today's online environment, visual design isn't just aesthetics, it's business strategy.
-              It demands consistency in voice, identity, content, user experience and more — all of which take significant 
+              In today&apos;s online environment, visual design isn&apos;t just aesthetics, it&apos;s business strategy.
+              It demands consistency in voice, identity, and content — all of which take significant 
               time and resources to maintain. You can either make the time to do it yourself, or 
               partner with someone who can scale with you, on your budget.
             </p>
