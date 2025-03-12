@@ -13,7 +13,7 @@ interface ServiceDetailProps {
 export function ServiceDetail({ service }: ServiceDetailProps) {
   // Get the icon component
   const Icon = getIconByName(service.iconName);
-  
+
   return (
     <div className="w-full py-12 md:py-24 bg-white">
       <div className="container px-4 md:px-6">
@@ -38,30 +38,16 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
               className="mb-8"
             >
               <div className="flex items-center mb-5">
-                <div className="mr-4 md:mr-5 p-2.5 md:p-3 rounded-lg" 
-                     style={{
-                       backgroundColor: service.color === 'purple' 
-                         ? 'rgba(147, 51, 234, 0.1)' 
-                         : service.color === 'blue' 
-                           ? 'rgba(59, 130, 246, 0.1)' 
-                           : service.color === 'cyan' 
-                             ? 'rgba(6, 182, 212, 0.1)' 
-                             : 'rgba(99, 102, 241, 0.1)'
-                     }}>
-                  <Icon className="h-7 w-7 md:h-9 md:w-9" 
-                     style={{
-                       color: service.color === 'purple' 
-                         ? 'rgb(147, 51, 234)' 
-                         : service.color === 'blue' 
-                           ? 'rgb(59, 130, 246)' 
-                           : service.color === 'cyan' 
-                             ? 'rgb(6, 182, 212)' 
-                             : 'rgb(99, 102, 241)'
-                     }}/>
+                <div className="mr-4 md:mr-5 p-2.5 md:p-3 rounded-lg bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10">
+                  <Icon className="h-7 w-7 md:h-9 md:w-9 text-blue-600" />
                 </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif tracking-tight">
-                  {service.title}
-                </h1>
+                <div>
+                  <div className="mb-1">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif tracking-tight">
+                      {service.title}
+                    </h1>
+                  </div>
+                </div>
               </div>
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl">
                 {service.description}
@@ -99,7 +85,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + (index * 0.05), duration: 0.5 }}
                     whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                    className="p-5 rounded-xl border border-gray-100 bg-gray-50 hover:shadow-sm transition-all duration-300"
+                    className="p-5 rounded-xl border border-gray-100 bg-gradient-to-br from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02] hover:from-purple-600/[0.05] hover:via-blue-500/[0.05] hover:to-cyan-400/[0.05] hover:shadow-sm transition-all duration-300"
                   >
                     <h3 className="text-lg font-bold mb-2 text-gray-900">{feature.title}</h3>
                     <p className="text-gray-600">{feature.description}</p>
@@ -129,15 +115,15 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
                         transition={{ delay: 0.3 + (index * 0.05), duration: 0.5 }}
                         className="flex group"
                       >
-                        <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5 group-hover:bg-green-200 transition-all duration-300">
-                          <Check className="h-3.5 w-3.5 text-green-600" />
+                        <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center mr-3 mt-0.5 group-hover:from-purple-600/20 group-hover:via-blue-500/20 group-hover:to-cyan-400/20 transition-all duration-300">
+                          <Check className="h-3.5 w-3.5 text-blue-600" />
                         </div>
                         <span className="text-gray-700">{benefit}</span>
                       </motion.li>
                     ))}
                   </ul>
                 </div>
-                <div className="p-6 md:p-7 bg-gradient-to-br from-purple-600/5 to-blue-500/5">
+                <div className="p-6 md:p-7 bg-gradient-to-br from-purple-600/5 via-blue-500/5 to-cyan-400/5">
                   <h3 className="text-xl font-bold font-serif mb-3 text-gray-900">
                     Ready to Get Started?
                   </h3>
