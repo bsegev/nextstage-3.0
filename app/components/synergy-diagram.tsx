@@ -106,7 +106,7 @@ export default function SynergyDiagram() {
   const activeDetails = getActiveDetails()
 
   return (
-    <section ref={sectionRef} className="w-full py-24 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="w-full py-12 md:py-24 bg-white relative overflow-hidden">
       <motion.div 
         className="container px-4 md:px-6 mx-auto"
         initial="hidden"
@@ -114,15 +114,20 @@ export default function SynergyDiagram() {
         variants={containerVariants}
       >
         <motion.div 
-          className="flex flex-col items-center text-center mb-12"
+          className="flex flex-col items-center justify-center space-y-4 text-center mb-12"
           variants={itemVariants}
         >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none font-serif mb-4">
-            <span className="animated-gradient">Vision</span> to Reality
-          </h2>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl mb-16">
-            Transforming your ideas into market-ready solutions through the synergy of strategy, design, and technology.
-          </p>
+          <div className="space-y-2 max-w-3xl">
+            <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm">
+              Strategic Framework
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
+              From your goals to <span className="animated-gradient">strategic reality</span>
+            </h2>
+            <p className="text-muted-foreground md:text-xl">
+              An integrated approach to turn your ideas into market-ready solutions through the synergy of strategy, design, and technology.
+            </p>
+          </div>
         </motion.div>
 
         <div className="max-w-[1100px] mx-auto">

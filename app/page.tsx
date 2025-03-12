@@ -11,6 +11,7 @@ import { WhyNextStage } from "./components/why-nextstage"
 import Pricing from "./components/pricing"
 import { Testimonials } from "./components/testimonials"
 import { ShowcaseCarousel } from "./components/showcase-carousel"
+import { DesignImpact } from "./components/design-impact"
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <DesignImpact />
         <SynergyDiagram />
         <ShowcaseCarousel />
         <Services />

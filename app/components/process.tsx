@@ -180,14 +180,15 @@ export function Process() {
         >
           <div className="space-y-2 max-w-3xl">
             <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm">
-              How It Works
+              The Journey
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
-              <span className="animated-gradient">Bespoke</span> — Process
+              How we go from raw idea to<br />
+              <span className="animated-gradient">market success</span>
             </h2>
-            <p className="text-muted-foreground md:text-lg">
-              Our signature process is centered on developing the deepest understanding of your business possible,
-              so that when we create your assets, they not only captivate, but drive real results.
+            <p className="text-muted-foreground md:text-xl">
+              Our signature process transforms your vision into reality through deep understanding, 
+              strategic thinking, and meticulous execution at every step.
             </p>
           </div>
         </motion.div>
@@ -197,15 +198,17 @@ export function Process() {
           <div className="relative">
             <div 
               ref={carouselRef}
-              className="flex overflow-x-hidden snap-x snap-mandatory -mx-4 px-4 pb-4 touch-pan-x"
-              style={scrollbarHideStyles}
+              className="flex overflow-x-scroll snap-x snap-mandatory -mx-4 px-4 pb-4 touch-pan-x scroll-smooth"
+              style={{
+                ...scrollbarHideStyles,
+                scrollBehavior: 'smooth'
+              }}
             >
               {processSteps.map((step, index) => (
                 <div 
                   key={step.number}
                   ref={(el) => { stepRefs.current[index] = el }}
                   className="flex-shrink-0 w-full snap-center px-2"
-                  style={{ scrollSnapAlign: 'center', scrollSnapStop: 'always' }}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -213,22 +216,26 @@ export function Process() {
                       opacity: 1, 
                       y: 0,
                       transition: {
-                        duration: 0.8,
-                        delay: 0.2 + index * 0.1,
+                        duration: 0.6,
+                        delay: 0.1 + index * 0.1,
                         ease: [0.22, 1, 0.36, 1]
                       }
                     } : { opacity: 0, y: 20 }}
-                    className={`process-step ${activeStep === index + 1 ? "active" : ""}`}
+                    className={`process-step transform transition-all duration-300 ${
+                      activeStep === index + 1 ? "scale-100" : "scale-95 opacity-50"
+                    }`}
                   >
                     <div className={`process-step-inner relative z-10 rounded-lg p-6 h-full transition-all duration-500 ${
                       activeStep === index + 1 
-                        ? "bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 shadow-lg" 
-                        : "bg-white"
+                        ? "bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 shadow-lg border border-purple-100" 
+                        : "bg-white border border-gray-100"
                     }`}>
-                      <div className="process-number font-serif text-4xl font-bold text-purple-600">{step.number}</div>
+                      <div className="process-number font-serif text-4xl font-bold text-purple-600 opacity-90">{step.number}</div>
                       <div className="process-content pl-8 mt-4">
                         <h3 className="text-xl font-bold font-serif">{step.title}</h3>
-                        <div className="h-px w-16 bg-gradient-to-r from-purple-400 to-blue-400 my-3"></div>
+                        <div className={`h-px w-16 bg-gradient-to-r from-purple-400 to-blue-400 my-3 transition-all duration-300 ${
+                          activeStep === index + 1 ? "opacity-100" : "opacity-50"
+                        }`}></div>
                         <p className="text-muted-foreground mt-4">{step.description}</p>
                       </div>
                     </div>
@@ -237,21 +244,66 @@ export function Process() {
               ))}
             </div>
             
-            {/* Navigation dots */}
-            <div className="flex justify-center mt-6 space-x-2">
-              {processSteps.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveStep(index + 1)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeStep === index + 1 
-                      ? "bg-purple-600 w-4" 
-                      : "bg-gray-300"
-                  }`}
-                  aria-label={`Go to step ${index + 1}`}
-                />
-              ))}
+            {/* Navigation dots with labels */}
+            <div className="flex flex-col items-center mt-8 space-y-4">
+              <div className="flex justify-center space-x-3">
+                {processSteps.map((step, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setActiveStep(index + 1)
+                      if (carouselRef.current) {
+                        carouselRef.current.scrollTo({
+                          left: index * carouselRef.current.offsetWidth,
+                          behavior: 'smooth'
+                        })
+                      }
+                    }}
+                    className="flex flex-col items-center group"
+                  >
+                    <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      activeStep === index + 1 
+                        ? "bg-purple-600 w-6" 
+                        : "bg-gray-300 group-hover:bg-gray-400"
+                    }`} />
+                    <span className={`text-xs mt-2 transition-all duration-300 ${
+                      activeStep === index + 1
+                        ? "text-purple-600"
+                        : "text-gray-400 group-hover:text-gray-600"
+                    }`}>
+                      {step.number}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Swipe indicator - shows only on first view */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: showIndicator ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 pointer-events-none"
+            >
+              <div className="absolute inset-y-0 right-4 flex items-center">
+                <div className="bg-white/80 backdrop-blur-sm px-3 py-2 rounded-full shadow-sm border border-gray-200/50">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <motion.div
+                      animate={{ x: [0, 8, 0] }}
+                      transition={{ 
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="text-gray-400"
+                    >
+                      ←
+                    </motion.div>
+                    <span className="text-gray-600 whitespace-nowrap">Swipe to explore</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         ) : (
           // Desktop view
@@ -282,20 +334,25 @@ export function Process() {
                     : "bg-white hover:bg-slate-50"
                 }`}>
                   <div className="process-number font-serif text-4xl font-bold text-purple-600">{step.number}</div>
-                  <motion.div 
-                    className="process-content pl-8"
-                    initial={false}
-                    animate={{ 
-                      opacity: activeStep === index + 1 ? 1 : 0,
-                      height: activeStep === index + 1 ? "auto" : "0px",
-                      marginTop: activeStep === index + 1 ? "1rem" : "0rem"
-                    }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <h3 className="text-xl font-bold font-serif">{step.title}</h3>
-                    <div className="process-divider"></div>
-                    <p className="text-muted-foreground mt-4">{step.description}</p>
-                  </motion.div>
+                  <div className="relative h-[160px]">
+                    <motion.div 
+                      className={`process-content pl-8 pt-4 absolute top-0 left-0 w-full`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ 
+                        opacity: activeStep === index + 1 ? 1 : 0,
+                        y: activeStep === index + 1 ? 0 : -10,
+                        pointerEvents: activeStep === index + 1 ? "auto" : "none"
+                      }}
+                      transition={{ 
+                        opacity: { duration: 0.2, ease: "easeOut" },
+                        y: { duration: 0.3, ease: "easeOut" }
+                      }}
+                    >
+                      <h3 className="text-xl font-bold font-serif">{step.title}</h3>
+                      <div className="h-px w-16 bg-gradient-to-r from-purple-400 to-blue-400 my-3"></div>
+                      <p className="text-muted-foreground mt-4">{step.description}</p>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -348,7 +348,7 @@ export function Services() {
                       </div>
                       <div className="flex justify-end mt-3">
                         <span className="text-xs font-medium text-blue-600 hover:underline">Learn more &rarr;</span>
-                      </div>
+                  </div>
                     </div>
                   </div>
                 </Link>
@@ -395,8 +395,8 @@ export function Services() {
               </Link>
             </div>
           </motion.div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
     </section>
   )
-}
+} 
