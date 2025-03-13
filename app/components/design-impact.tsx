@@ -13,7 +13,7 @@ export function DesignImpact() {
       icon: Clock,
       value: "0.05",
       unit: "seconds",
-      description: "to make a first impression online"
+      description: "to make a first impression online and keep visitors scrolling"
     },
     {
       icon: Users,
@@ -25,7 +25,7 @@ export function DesignImpact() {
       icon: Eye,
       value: "38",
       unit: "%",
-      description: "stop engaging with unattractive content or layouts"
+      description: "stop engaging with bad layouts leading to a higher bounce rate"
     }
   ]
 
@@ -62,7 +62,7 @@ export function DesignImpact() {
                   <div className="w-24 md:w-full md:aspect-[3/1] bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center flex-shrink-0">
                     <stat.icon className="h-8 w-8 text-blue-600" />
                   </div>
-                  <div className="flex-1 min-w-0 p-4 md:p-6">
+                  <div className="flex-1 min-w-0 px-6 py-6 md:p-6">
                     <div className="flex items-baseline mb-2 md:justify-center">
                       <span className="text-3xl font-bold text-gray-900">{stat.value}</span>
                       <span className="text-lg text-gray-600 ml-1">{stat.unit}</span>
