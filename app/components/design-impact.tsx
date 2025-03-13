@@ -89,10 +89,17 @@ export function DesignImpact() {
           >
             <h3 className="text-lg font-bold tracking-tight text-center mb-3">THE REALITY</h3>
             <p className="text-center text-gray-700 md:text-lg">
-              In today&apos;s online environment, visual design isn&apos;t just aesthetics, it&apos;s business strategy.
+              In today&apos;s online environment, visual design isn&apos;t just aesthetics, it&apos;s{' '}
+              <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">
+                business strategy
+              </span>.
               It demands consistency in voice, identity, and content — all of which take significant 
               time and resources to maintain. You can either make the time to do it yourself, or 
-              partner with someone who can scale with you, on your budget.
+              partner with someone who can scale with you,{' '}
+              <span className="font-bold italic relative">
+                on your budget
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400"></span>
+              </span>.
             </p>
           </motion.div>
         </motion.div>
