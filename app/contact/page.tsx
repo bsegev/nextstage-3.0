@@ -1,17 +1,18 @@
+import { Header } from "../components/header"
+
 export default function ContactPage() {
   return (
-    <main className="flex-1">
-      <section className="w-full py-12 md:py-24 lg:py-32">
+    <main className="min-h-screen bg-white">
+      <Header />
+      <section className="w-full py-16 bg-gradient-to-b from-white to-slate-50">
         <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                Get in Touch
-              </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Let&apos;s discuss how we can help transform your digital presence.
-              </p>
-            </div>
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight font-serif text-center mb-8">
+              Contact <span className="animated-gradient">NextStage</span>
+            </h1>
+            <p className="text-gray-700 md:text-lg text-center">
+              Placeholder content for the Contact page. We&apos;ll add a contact form and other details here.
+            </p>
           </div>
         </div>
       </section>

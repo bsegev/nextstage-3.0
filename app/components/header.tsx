@@ -81,7 +81,7 @@ export function Header() {
               asChild 
               className="ml-4 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
             >
-              <Link href="#contact">Schedule Call</Link>
+              <Link href="/contact">Schedule Call</Link>
             </Button>
           </motion.div>
         </nav>
@@ -145,7 +145,7 @@ export function Header() {
                   className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="#contact">Schedule Call</Link>
+                  <Link href="/contact">Schedule Call</Link>
                 </Button>
               </motion.div>
             </div>
