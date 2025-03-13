@@ -1,9 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SynergyDiagram from "./components/synergy-diagram"
-import { Header } from "./components/header"
 import { Hero } from "./components/hero"
 import { Services } from "./components/services"
 import { Process } from "./components/process"
