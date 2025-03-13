@@ -56,18 +56,22 @@ export function DesignImpact() {
                     ease: [0.22, 1, 0.36, 1]
                   }
                 } : { opacity: 0, y: 20 }}
-                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center"
+                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 md:text-center"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center">
-                    <stat.icon className="h-6 w-6 text-blue-600" />
+                <div className="flex md:flex-col items-center gap-4 md:gap-0">
+                  <div className="md:mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center">
+                      <stat.icon className="h-6 w-6 text-blue-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline mb-1 md:mb-2 md:justify-center">
+                      <span className="text-3xl font-bold text-gray-900">{stat.value}</span>
+                      <span className="text-lg text-gray-600 ml-1">{stat.unit}</span>
+                    </div>
+                    <p className="text-gray-600 text-sm md:text-base">{stat.description}</p>
                   </div>
                 </div>
-                <div className="flex items-baseline justify-center mb-2">
-                  <span className="text-3xl font-bold text-gray-900">{stat.value}</span>
-                  <span className="text-lg text-gray-600 ml-1">{stat.unit}</span>
-                </div>
-                <p className="text-gray-600">{stat.description}</p>
               </motion.div>
             ))}
           </div>
