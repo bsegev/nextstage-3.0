@@ -7,7 +7,7 @@ import { useInView } from "framer-motion"
 import { useRef } from "react"
 
 export default function SynergyDiagram() {
-  const [activeCircle, setActiveCircle] = useState<string | null>(null)
+  const [activeCircle, setActiveCircle] = useState<string | null>("center")
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { amount: 0.3, once: true })
 
@@ -210,19 +210,14 @@ export default function SynergyDiagram() {
                       onClick={() => setActiveCircle(activeCircle === "technology" ? null : "technology")}
                     />
 
-                    {/* Center Area */}
+                    {/* Center Area - Invisible but clickable */}
                     <path
                       d="M 200,200 
                          A 100,100 0 0,1 250,200 
                          A 100,100 0 0,1 200,250 
                          A 100,100 0 0,1 150,200 
                          A 100,100 0 0,1 200,200"
-                      className={`cursor-pointer transition-all duration-300 hover:lg:scale-[1.02] origin-center`}
-                      fill="transparent"
-                      style={{
-                        stroke: activeCircle === "center" ? "rgba(0,0,0,0.2)" : "transparent",
-                        strokeWidth: "2"
-                      }}
+                      className="cursor-pointer fill-transparent"
                       onClick={() => setActiveCircle(activeCircle === "center" ? null : "center")}
                     />
 
@@ -259,14 +254,34 @@ export default function SynergyDiagram() {
                       </text>
 
                       {/* Center Label */}
-                      <text 
-                        x="200" 
-                        y="210" 
-                        textAnchor="middle" 
-                        className={`font-serif text-xl transition-colors duration-300 ${activeCircle === "center" ? "fill-gray-900 font-bold" : "fill-gray-600"}`}
-                      >
-                        NextStage
-                      </text>
+                      <g transform="translate(200, 210)">
+                        <rect
+                          x="-55"
+                          y="-20"
+                          width="110"
+                          height="34"
+                          rx="17"
+                          className={`transition-all duration-300 ${
+                            activeCircle === "center" 
+                              ? "fill-white stroke-[url(#labelGradient)] stroke-[3]" 
+                              : "fill-white/50 stroke-transparent"
+                          }`}
+                          style={{
+                            filter: activeCircle === "center" ? "drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1))" : "none"
+                          }}
+                        />
+                        <text 
+                          textAnchor="middle" 
+                          dy="5"
+                          className={`font-serif text-lg transition-colors duration-300 ${
+                            activeCircle === "center" 
+                              ? "fill-gray-900 font-bold" 
+                              : "fill-gray-600"
+                          }`}
+                        >
+                          NextStage
+                        </text>
+                      </g>
                     </g>
                   </g>
 
@@ -296,6 +311,43 @@ export default function SynergyDiagram() {
                       <stop offset="0%" stopColor="rgba(34, 211, 238, 0.15)" />
                       <stop offset="100%" stopColor="rgba(34, 211, 238, 0.05)" />
                     </radialGradient>
+                    <radialGradient id="centerGradient">
+                      <stop offset="0%" stopColor="rgba(147, 51, 234, 0.15)" />
+                      <stop offset="33%" stopColor="rgba(59, 130, 246, 0.15)" />
+                      <stop offset="66%" stopColor="rgba(34, 211, 238, 0.15)" />
+                      <stop offset="100%" stopColor="rgba(147, 51, 234, 0.15)" />
+                    </radialGradient>
+                    <linearGradient id="fill-gradient-subtle" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="rgba(147, 51, 234, 0.08)" />
+                      <stop offset="50%" stopColor="rgba(59, 130, 246, 0.08)" />
+                      <stop offset="100%" stopColor="rgba(34, 211, 238, 0.08)" />
+                    </linearGradient>
+                    <linearGradient id="labelGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="rgb(147, 51, 234)">
+                        <animate
+                          attributeName="offset"
+                          values="0;1;0"
+                          dur="4s"
+                          repeatCount="indefinite"
+                        />
+                      </stop>
+                      <stop offset="50%" stopColor="rgb(59, 130, 246)">
+                        <animate
+                          attributeName="offset"
+                          values="0.5;1.5;0.5"
+                          dur="4s"
+                          repeatCount="indefinite"
+                        />
+                      </stop>
+                      <stop offset="100%" stopColor="rgb(34, 211, 238)">
+                        <animate
+                          attributeName="offset"
+                          values="1;2;1"
+                          dur="4s"
+                          repeatCount="indefinite"
+                        />
+                      </stop>
+                    </linearGradient>
                   </defs>
                 </svg>
               </div>
