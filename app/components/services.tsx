@@ -316,6 +316,19 @@ export function Services() {
           </motion.div>
         )}
 
+        {activeCategory === "popular" && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10 max-w-2xl mx-auto"
+          >
+            <p className="text-muted-foreground">
+              Not a comprehensive list, but the services clients most frequently reach out for. All projects include strategic consultation to identify additional opportunities.
+            </p>
+          </motion.div>
+        )}
+
         <motion.div 
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           variants={containerVariants}
