@@ -1,23 +1,15 @@
-import type React from "react"
-import "@/app/globals.css"
-import { Inter, Fraunces } from "next/font/google"
+import type { Metadata } from "next"
+import { Inter, Playfair_Display } from "next/font/google"
+import "./globals.css"
+import { Header } from "./components/header"
+import { Footer } from "./components/footer"
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-})
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-fraunces",
-})
-
-export const metadata = {
-  title: "NextStage - Transform your startup vision into reality",
-  description:
-    "Strategically designed MVPs, powerful branding, and investor-ready assets—crafted precisely to take you from idea to growth.",
+export const metadata: Metadata = {
+  title: "NextStage - Strategic Design & Development",
+  description: "Transform your digital presence with strategic design and development solutions.",
 }
 
 export default function RootLayout({
@@ -26,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className={`min-h-screen flex flex-col font-sans antialiased`}>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
