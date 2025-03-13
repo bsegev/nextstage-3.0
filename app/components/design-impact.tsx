@@ -59,7 +59,7 @@ export function DesignImpact() {
                 className="bg-white rounded-xl shadow-sm border border-gray-100 md:text-center"
               >
                 <div className="flex md:flex-col h-full">
-                  <div className="w-24 md:w-full md:aspect-[2/1] bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-24 md:w-full md:aspect-[3/1] bg-gradient-to-br from-purple-600/10 via-blue-500/10 to-cyan-400/10 flex items-center justify-center flex-shrink-0">
                     <stat.icon className="h-8 w-8 text-blue-600" />
                   </div>
                   <div className="flex-1 min-w-0 p-4 md:p-6">
