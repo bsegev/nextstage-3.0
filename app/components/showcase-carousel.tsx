@@ -19,6 +19,12 @@ const showcaseItems: ShowcaseItem[] = [
     bgImage: "/showcase/sp-bg.jpg"
   },
   {
+    title: "Cryptocurrency Platform",
+    descr: "DASHBOARD",
+    image: "/showcase/crypto-carousel.png",
+    bgImage: "/showcase/crypto-bg.jpg"
+  },
+  {
     title: "AI Podcast Platform",
     descr: "WEBSITE",
     image: "/showcase/ai-podcast-mockup.jpg",
@@ -179,13 +185,21 @@ export function ShowcaseCarousel() {
                   )}
                   {index === 1 && (
                     <>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Dashboard Design</span>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Data Visualization</span>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">UX Research</span>
+                      <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Responsive Design</span>
+                    </>
+                  )}
+                  {index === 2 && (
+                    <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Branding</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Website</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Copywriting</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">CMS</span>
                     </>
                   )}
-                  {index === 2 && (
+                  {index === 3 && (
                     <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Full Service Partnership</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Sales Coaching</span>
@@ -194,7 +208,7 @@ export function ShowcaseCarousel() {
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Design System</span>
                     </>
                   )}
-                  {index === 3 && (
+                  {index === 4 && (
                     <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Branding</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Website</span>
@@ -205,14 +219,14 @@ export function ShowcaseCarousel() {
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Explainer Videos</span>
                     </>
                   )}
-                  {index === 4 && (
+                  {index === 5 && (
                     <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Website</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">CMS</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">SEO</span>
                     </>
                   )}
-                  {index === 5 && (
+                  {index === 6 && (
                     <>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Branding</span>
                       <span className="text-[13px] px-3 py-0.5 rounded-full bg-gray-800/80 text-gray-300">Website</span>
