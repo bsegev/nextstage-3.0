@@ -3,6 +3,7 @@
 import { notFound, useParams } from "next/navigation"
 import { servicesData } from "@/app/data/servicesData"
 import { ServiceDetail } from "@/app/components/service-detail"
+import { Footer } from "@/app/components/footer"
 import { useEffect } from "react"
 
 export default function ServicePage() {
@@ -22,5 +23,10 @@ export default function ServicePage() {
     notFound();
   }
 
-  return <ServiceDetail service={service} />;
+  return (
+    <div className="flex min-h-screen flex-col">
+      <ServiceDetail service={service} />
+      <Footer />
+    </div>
+  );
 } 

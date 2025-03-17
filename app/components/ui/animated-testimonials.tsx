@@ -2,7 +2,7 @@
 
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 type Testimonial = {
   quote: string;
@@ -20,66 +20,31 @@ export const AnimatedTestimonials = ({
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
-  const [loadedVideos, setLoadedVideos] = useState<Set<string>>(new Set());
-  const nextToLoad = useRef<number | null>(null);
 
-  const preloadVideo = useCallback((index: number) => {
-    if (loadedVideos.has(testimonials[index].src)) return;
-    
-    const video = document.createElement('video');
-    video.src = testimonials[index].src;
-    video.preload = 'auto';
-    video.load();
-    
-    setLoadedVideos(prev => new Set([...prev, testimonials[index].src]));
-  }, [testimonials, loadedVideos]);
+  const handleNext = () => {
+    setActive((prev) => (prev + 1) % testimonials.length);
+  };
 
-  const handleNext = useCallback(() => {
-    const nextIndex = (active + 1) % testimonials.length;
-    setActive(nextIndex);
-    // Preload the next video after this one
-    const nextNextIndex = (nextIndex + 1) % testimonials.length;
-    preloadVideo(nextNextIndex);
-  }, [active, testimonials.length, preloadVideo]);
+  const handlePrev = () => {
+    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
-  const handlePrev = useCallback(() => {
-    const prevIndex = (active - 1 + testimonials.length) % testimonials.length;
-    setActive(prevIndex);
-    // Preload the previous video
-    const prevPrevIndex = (prevIndex - 1 + testimonials.length) % testimonials.length;
-    preloadVideo(prevPrevIndex);
-  }, [active, testimonials.length, preloadVideo]);
-
-  // Preload next video
-  useEffect(() => {
-    const nextIndex = (active + 1) % testimonials.length;
-    if (nextToLoad.current !== nextIndex) {
-      nextToLoad.current = nextIndex;
-      preloadVideo(nextIndex);
-    }
-  }, [active, testimonials.length, preloadVideo]);
+  const isActive = (index: number) => {
+    return index === active;
+  };
 
   useEffect(() => {
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay, handleNext]);
-
-  const isActive = (index: number) => {
-    return index === active;
-  };
+  }, [autoplay]);
 
   const getRotation = (index: number) => {
     // Use a deterministic pattern based on index
     const rotations = [-8, -4, 4, 8, -6, 6];
     return rotations[index % rotations.length];
   };
-
-  // Preload the first video immediately
-  useEffect(() => {
-    preloadVideo(0);
-  }, [preloadVideo]);
 
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-6xl md:px-8 lg:px-12">
@@ -118,17 +83,14 @@ export const AnimatedTestimonials = ({
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  {(isActive(index) || loadedVideos.has(testimonial.src)) && (
-                    <video
-                      key={testimonial.src}
-                      src={testimonial.src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="h-full w-full rounded-3xl object-cover object-center"
-                    />
-                  )}
+                  <video
+                    src={testimonial.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full rounded-3xl object-cover object-center"
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>

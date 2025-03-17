@@ -1,35 +1,38 @@
-import { Target, Zap, Sparkles, Users } from "lucide-react"
+"use client"
+
+import { Target, Sparkles, Users, Brain } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { Cover } from "@/app/components/ui/cover"
 
 const features = [
   {
     icon: Target,
     title: "Market-Focused Results",
-    description: "Everything I build is designed to help you secure funding or drive customer growth.",
+    description: "Every deliverable is thoughtfully crafted around clear business outcomes, turning your goals into tangible growth.",
     gradientFrom: "from-purple-600",
     gradientTo: "to-purple-400",
   },
   {
-    icon: Zap,
-    title: "AI-Enabled Efficiency",
-    description: "Leveraging the latest and greatest for faster delivery without compromising quality.",
-    gradientFrom: "from-blue-500",
-    gradientTo: "to-blue-300",
-  },
-  {
     icon: Sparkles,
-    title: "Full-Service Flexibility",
-    description: "From branding and MVPs to strategy and sales tools — get what you need when you need it.",
+    title: "Adaptive Collaboration",
+    description: "Services flexibly tailored to your evolving needs—seamlessly scaling with your business without friction.",
     gradientFrom: "from-cyan-500",
     gradientTo: "to-cyan-300",
   },
   {
     icon: Users,
-    title: "One Point of Contact",
-    description: "Work directly with me for consistent quality and communication.",
+    title: "One Expert, End-to-End",
+    description: "Direct partnership means clarity, accountability, and expert-quality results—no layers, no confusion.",
     gradientFrom: "from-indigo-600",
     gradientTo: "to-indigo-400",
+  },
+  {
+    icon: Brain,
+    title: "Accelerated Execution",
+    description: "Work moves swiftly and precisely, driven by deep experience and enhanced by the latest tools for unmatched efficiency.",
+    gradientFrom: "from-blue-600",
+    gradientTo: "to-blue-400",
   },
 ]
 
@@ -49,27 +52,29 @@ export function WhyNextStage() {
         />
         
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Centered Header */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
+            className="text-center mb-16 md:mb-20 max-w-3xl"
           >
-            <div className="space-y-3 max-w-3xl">
-              <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-cyan-400/20 px-4 py-1.5 text-sm font-medium border border-slate-700/50 shadow-inner">
-                Why NextStage
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
-                Designed for your <span className="animated-gradient">success</span>
-              </h2>
-              <p className="text-slate-300 max-w-2xl mx-auto">
-                A unique approach that blends strategic thinking, creative design, and technical excellence
-              </p>
+            <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-cyan-400/20 px-3 py-1 text-sm">
+              Why NextStage
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
+              Years of expertise<br />
+              <span className="animated-gradient">now enhanced by AI</span>
+            </h2>
+            <div className="text-muted-foreground md:text-xl mt-6 text-slate-300">
+              NextStage now leverages AI to make your projects <Cover variant="smart">smarter</Cover> and <Cover>faster</Cover>, 
+              while maintaining the human touch that drives success.
             </div>
           </motion.div>
-          
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
             {features.map((feature, index) => (
               <motion.div 
                 key={feature.title}
