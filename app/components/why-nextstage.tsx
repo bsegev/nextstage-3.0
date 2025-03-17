@@ -74,7 +74,7 @@ export function WhyNextStage() {
           </motion.div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto">
             {features.map((feature, index) => (
               <motion.div 
                 key={feature.title}
@@ -88,15 +88,15 @@ export function WhyNextStage() {
                     ease: [0.22, 1, 0.36, 1]
                   }
                 } : { opacity: 0, y: 20 }}
-                className="flex flex-col p-6 rounded-xl bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-slate-600/80 transition-all duration-300 hover:shadow-lg hover:shadow-slate-900/30 group"
+                className="flex flex-col p-7 rounded-xl bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-slate-600/80 transition-all duration-300 hover:shadow-lg hover:shadow-slate-900/30 group"
               >
-                <div className={`p-3 rounded-lg bg-gradient-to-br ${feature.gradientFrom} ${feature.gradientTo} bg-opacity-10 w-14 h-14 flex items-center justify-center mb-4 shadow-md group-hover:shadow-lg transition-all duration-300`}>
+                <div className={`p-3 rounded-lg bg-gradient-to-br ${feature.gradientFrom} ${feature.gradientTo} bg-opacity-10 w-14 h-14 flex items-center justify-center mb-5 shadow-md group-hover:shadow-lg transition-all duration-300`}>
                   <feature.icon className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h3 className="text-xl font-bold font-serif mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-300 transition-all duration-300">
+                <h3 className="text-2xl font-bold font-serif mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-300 transition-all duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-slate-300 text-sm">{feature.description}</p>
+                <p className="text-slate-300 text-base leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
