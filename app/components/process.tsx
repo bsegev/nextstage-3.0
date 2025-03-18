@@ -17,6 +17,7 @@ export function Process() {
   const [activeStep, setActiveStep] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
   const [showIndicator, setShowIndicator] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const indicatorTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef(null)
@@ -35,11 +36,12 @@ export function Process() {
     
     // Show the indicator
     setShowIndicator(true)
+    setHasScrolled(false)
     
-    // Hide after 2 seconds
+    // Hide after 5 seconds even if no interaction
     indicatorTimeoutRef.current = setTimeout(() => {
       setShowIndicator(false)
-    }, 2000)
+    }, 5000)
     
     return () => {
       if (indicatorTimeoutRef.current) {
@@ -70,6 +72,12 @@ export function Process() {
     const handleScroll = () => {
       if (!carouselRef.current) return
       
+      // Hide the indicator once user has scrolled
+      if (!hasScrolled) {
+        setHasScrolled(true)
+        setShowIndicator(false)
+      }
+      
       const scrollPosition = carouselRef.current.scrollLeft
       const itemWidth = carouselRef.current.offsetWidth
       const newActiveStep = Math.round(scrollPosition / itemWidth) + 1
@@ -87,7 +95,7 @@ export function Process() {
         carousel.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [isMobile, activeStep])
+  }, [isMobile, activeStep, hasScrolled])
 
   // Scroll to active step when it changes
   useEffect(() => {
