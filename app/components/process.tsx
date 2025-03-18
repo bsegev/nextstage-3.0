@@ -67,54 +67,24 @@ export function Process() {
   useEffect(() => {
     if (!isMobile || !carouselRef.current) return
 
-    let isScrolling = false
-    let startX = 0
-    let startScrollLeft = 0
-
-    const handleTouchStart = (e: TouchEvent) => {
+    const handleScroll = () => {
       if (!carouselRef.current) return
-      isScrolling = true
-      startX = e.touches[0].pageX
-      startScrollLeft = carouselRef.current.scrollLeft
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!isScrolling || !carouselRef.current) return
-      e.preventDefault() // Prevent default scrolling behavior
       
-      const x = e.touches[0].pageX
-      const walk = x - startX
-      carouselRef.current.scrollLeft = startScrollLeft - walk
-    }
-
-    const handleTouchEnd = () => {
-      if (!isScrolling || !carouselRef.current) return
-      isScrolling = false
-      
+      const scrollPosition = carouselRef.current.scrollLeft
       const itemWidth = carouselRef.current.offsetWidth
-      const currentPosition = carouselRef.current.scrollLeft
-      const currentIndex = Math.round(currentPosition / itemWidth)
+      const newActiveStep = Math.round(scrollPosition / itemWidth) + 1
       
-      // Snap to the nearest step
-      carouselRef.current.scrollTo({
-        left: currentIndex * itemWidth,
-        behavior: 'smooth'
-      })
-      
-      // Update active step
-      setActiveStep(currentIndex + 1)
+      if (newActiveStep !== activeStep) {
+        setActiveStep(newActiveStep)
+      }
     }
 
     const carousel = carouselRef.current
-    carousel.addEventListener('touchstart', handleTouchStart, { passive: false })
-    carousel.addEventListener('touchmove', handleTouchMove, { passive: false })
-    carousel.addEventListener('touchend', handleTouchEnd)
+    carousel.addEventListener('scroll', handleScroll, { passive: true })
     
     return () => {
       if (carousel) {
-        carousel.removeEventListener('touchstart', handleTouchStart)
-        carousel.removeEventListener('touchmove', handleTouchMove)
-        carousel.removeEventListener('touchend', handleTouchEnd)
+        carousel.removeEventListener('scroll', handleScroll)
       }
     }
   }, [isMobile, activeStep])
@@ -159,7 +129,7 @@ export function Process() {
       number: "04",
       title: "Creation & Refinement",
       description:
-        "Kick back while we use our expertise to craft bespoke assets that celebrate your story, highlight your strengths, and move your audience to action.",
+        "Kick back while we use our expertise to craft bespoke assets that celebrate your story, highlight your strengths, and move from ideas to tangible reality.",
     },
     {
       number: "05",
@@ -187,8 +157,8 @@ export function Process() {
               <span className="animated-gradient">market success</span>
             </h2>
             <p className="text-muted-foreground md:text-xl">
-              Our signature process transforms your vision into reality through deep understanding, 
-              strategic thinking, and meticulous execution at every step.
+              Our carefully crafted process transforms your vision into reality through deep understanding, 
+              strategic thinking, and meticulous execution at every step. Whether it's for a logo, a website, or a full brand system, we've got you covered.
             </p>
           </div>
         </motion.div>
@@ -198,10 +168,12 @@ export function Process() {
           <div className="relative">
             <div 
               ref={carouselRef}
-              className="flex overflow-x-scroll snap-x snap-mandatory -mx-4 px-4 pb-4 touch-pan-x scroll-smooth"
+              className="flex overflow-x-scroll snap-x snap-mandatory -mx-4 px-4 pb-4 touch-pan-x"
               style={{
                 ...scrollbarHideStyles,
-                scrollBehavior: 'smooth'
+                scrollSnapType: 'x proximity',
+                WebkitOverflowScrolling: 'touch',
+                msOverflowStyle: '-ms-autohiding-scrollbar'
               }}
             >
               {processSteps.map((step, index) => (
@@ -209,6 +181,10 @@ export function Process() {
                   key={step.number}
                   ref={(el) => { stepRefs.current[index] = el }}
                   className="flex-shrink-0 w-full snap-center px-2"
+                  style={{
+                    scrollSnapAlign: 'center',
+                    scrollSnapStop: 'always'
+                  }}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
