@@ -86,12 +86,34 @@ export default function Pricing() {
               className="group aspect-auto md:aspect-[2/2.4]"
             >
               <div 
-                className={`h-full p-4 md:p-6 rounded-2xl ${
+                className={`h-full p-4 md:p-6 rounded-2xl relative overflow-hidden ${
                   tier.title === 'Signature' 
-                    ? 'bg-gradient-to-br from-purple-900/50 to-purple-800/30 border-purple-700/30 hover:border-purple-600/50 shadow-lg shadow-purple-900/20' 
-                    : 'bg-gray-900/50 border-gray-800/50 hover:border-gray-700/50'
-                } border transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/10 flex flex-col backdrop-blur-sm`}
+                    ? 'bg-gradient-to-br from-purple-900/50 to-purple-800/30 border-purple-700/30 hover:border-purple-500/70 shadow-lg shadow-purple-900/30' 
+                    : 'bg-gradient-to-b from-gray-800/90 to-gray-900/90 border-gray-400/30 hover:border-gray-400/60 shadow-lg shadow-gray-900/30'
+                } border transition-all duration-300 hover:shadow-xl flex flex-col backdrop-blur-sm`}
               >
+                {tier.title === 'Signature' ? (
+                  <span className="absolute inset-0 pointer-events-none">
+                    <span className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-purple-300/90 to-transparent"></span>
+                    <span className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-purple-300/60 to-transparent"></span>
+                    <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-purple-300/50 to-transparent"></span>
+                    <span className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-purple-300/60 to-transparent"></span>
+                    <span className="absolute inset-0">
+                      <span className="absolute -inset-full h-full w-[200%] bg-gradient-to-r from-transparent via-purple-400/20 to-transparent animate-shimmer"></span>
+                    </span>
+                  </span>
+                ) : (
+                  <span className="absolute inset-0 pointer-events-none">
+                    <span className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent"></span>
+                    <span className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent"></span>
+                    <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></span>
+                    <span className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent"></span>
+                    <span className="absolute inset-0">
+                      <span className="absolute -inset-full h-full w-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></span>
+                    </span>
+                    <span className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50"></span>
+                  </span>
+                )}
                 <div>
                   <div className="flex flex-wrap gap-2">
                     {tier.tags.map((tag, i) => (
@@ -142,13 +164,39 @@ export default function Pricing() {
                   <div className="w-full">
                     <button 
                       onClick={openModal}
-                      className={`w-full text-center text-[13px] font-medium py-2 md:py-2.5 inline-block border rounded-xl transition-all duration-300 ${
+                      className={`w-full text-center text-sm font-bold py-3.5 md:py-4 inline-block rounded-xl transition-all duration-300 relative overflow-hidden ${
                         tier.title === 'Signature'
-                          ? 'border-purple-500 text-purple-300 hover:bg-purple-600 hover:border-purple-600 hover:text-white'
-                          : 'border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-700 hover:text-white'
+                          ? 'border-2 border-purple-400/80 text-purple-200 hover:text-white shadow-md shadow-purple-900/30 hover:shadow-lg hover:shadow-purple-900/50 hover:scale-[1.03] bg-gradient-to-b from-purple-600/30 to-purple-800/30 hover:from-purple-500 hover:to-purple-700'
+                          : 'border-2 border-gray-200/30 text-gray-200 hover:text-white shadow-md hover:shadow-lg hover:scale-[1.03] bg-gradient-to-b from-gray-300/10 via-gray-500/5 to-gray-100/5 hover:border-gray-300/50'
                       }`}
                     >
-                      Schedule call
+                      {tier.title === 'Signature' ? (
+                        <>
+                          <span className="absolute inset-0 overflow-hidden">
+                            <span className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-purple-200/90 to-transparent"></span>
+                            <span className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-purple-200/70 to-transparent"></span>
+                            <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-purple-200/60 to-transparent"></span>
+                            <span className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-purple-200/70 to-transparent"></span>
+                          </span>
+                          <span className="absolute inset-0 -z-10">
+                            <span className="absolute -inset-full h-full w-[200%] bg-gradient-to-r from-transparent via-purple-300/30 to-transparent animate-shimmer"></span>
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="absolute inset-0 overflow-hidden">
+                            <span className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/90 to-transparent"></span>
+                            <span className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-white/70 to-transparent"></span>
+                            <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent"></span>
+                            <span className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-white/70 to-transparent"></span>
+                          </span>
+                          <span className="absolute inset-0 -z-10">
+                            <span className="absolute -inset-full h-full w-[200%] bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></span>
+                          </span>
+                          <span className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-30"></span>
+                        </>
+                      )}
+                      <span className="relative z-10">Schedule call</span>
                     </button>
                   </div>
                 </div>
