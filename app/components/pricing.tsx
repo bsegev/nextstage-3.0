@@ -1,10 +1,12 @@
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { useContactModal } from "@/app/context/contact-modal-context"
 
 export default function Pricing() {
   const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { amount: 0.3, once: true })
+  const isInView = useInView(sectionRef, { amount: 0.2, once: true })
+  const { openModal } = useContactModal()
 
   const serviceTiers = [
     {
@@ -138,8 +140,8 @@ export default function Pricing() {
                   </div>
 
                   <div className="w-full">
-                    <Link 
-                      href="#contact" 
+                    <button 
+                      onClick={openModal}
                       className={`w-full text-center text-[13px] font-medium py-2 md:py-2.5 inline-block border rounded-xl transition-all duration-300 ${
                         tier.title === 'Signature'
                           ? 'border-purple-500 text-purple-300 hover:bg-purple-600 hover:border-purple-600 hover:text-white'
@@ -147,7 +149,7 @@ export default function Pricing() {
                       }`}
                     >
                       Schedule call
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

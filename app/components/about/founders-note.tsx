@@ -3,8 +3,11 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { useContactModal } from "@/app/context/contact-modal-context"
 
 export function FoundersNote() {
+  const { openModal } = useContactModal()
+  
   return (
     <section className="w-full py-24 md:py-32">
       <div className="container px-4 md:px-6">
@@ -32,10 +35,11 @@ export function FoundersNote() {
                   <p className="text-xl font-bold text-gray-900">Ben Segev, Founder</p>
                 </div>
                 <Button 
-                  asChild 
+                  asChild={false}
                   className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 text-lg px-8"
+                  onClick={openModal}
                 >
-                  <Link href="/contact">Schedule Your Strategy Call</Link>
+                  Schedule Your Strategy Call
                 </Button>
               </div>
             </div>

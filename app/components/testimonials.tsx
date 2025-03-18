@@ -22,28 +22,28 @@ const testimonials = [
   {
     quote: "Ben's strategic approach and technical expertise transformed our digital presence. His ability to understand our vision and translate it into reality was exceptional.",
     name: "Edi F.",
-    designation: "CEO @ DIB",
+    designation: "Founder @ Digital International Bank",
     src: "/videos/logo-anim/DIB_logo_anim_loop.mov",
     tags: ["Full Service Partnership", "Sales Coaching", "Onboarding Streamline", "Strategy", "Design System"]
   },
   {
     quote: "Ben didn't just design beautifully—he brought a level of strategic thinking and industry fluency that's rare to find. His understanding of real estate and fundraising shaped not only the visuals, but the copy, narrative, and structure of everything he delivered. It felt less like working with a designer and more like having a partner who truly understood our world and what investors need to see.",
     name: "Marc E.",
-    designation: "Founder @ SparrowPark",
+    designation: "Founder @ SparrowPark Developments",
     src: "/videos/logo-anim/SparrowPark_logo_anim_loop.mov",
     tags: ["Pitch Deck", "AI Renderings", "Investor Materials", "Website", "Portfolio CMS"]
   },
   {
     quote: "The depth of expertise and attention to detail Ben brings to every project is remarkable. He truly understands how to leverage technology for business growth.",
     name: "Scott H.",
-    designation: "Director @ CRR",
+    designation: "Owner & CEO @ Costa Rica Recovery",
     src: "/videos/logo-anim/CRR_logo_anim_loop (1).mp4",
     tags: ["Branding", "Website", "Sales Decks", "Document Templates", "Copywriting", "LinkedIn Optimization", "Explainer Videos"]
   },
   {
     quote: "Ben brought fresh ideas and technical expertise to our marketing initiatives. His ability to blend creativity with data-driven decisions helped us achieve remarkable results.",
     name: "James S.",
-    designation: "Marketing Lead @ SwissHub",
+    designation: "Marketing Lead @ SwissHUB",
     src: "/videos/logo-anim/swissHUB_logo_anim_loop.mov",
     tags: ["Brand System", "Explainer Videos", "Sales Strategy", "CMS", "SEO"]
   }

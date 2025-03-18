@@ -1,6 +1,8 @@
 import type React from "react"
 import "@/app/globals.css"
 import { Inter, Fraunces } from "next/font/google"
+import { ContactModalProvider } from "./context/contact-modal-context"
+import { ContactModal } from "./components/contact-modal"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body>
-        {children}
+        <ContactModalProvider>
+          {children}
+          <ContactModal />
+        </ContactModalProvider>
       </body>
     </html>
   )

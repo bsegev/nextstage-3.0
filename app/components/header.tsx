@@ -5,9 +5,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useContactModal } from "@/app/context/contact-modal-context"
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const { openModal } = useContactModal()
 
   const menuItems = [
     { href: "/about", label: "About" },
@@ -78,10 +80,11 @@ export function Header() {
             }}
           >
             <Button 
-              asChild 
+              asChild={false}
               className="ml-4 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+              onClick={openModal}
             >
-              <Link href="/contact">Schedule Call</Link>
+              Schedule Call
             </Button>
           </motion.div>
         </nav>
@@ -141,11 +144,14 @@ export function Header() {
                 }}
               >
                 <Button 
-                  asChild 
+                  asChild={false}
                   className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false)
+                    openModal()
+                  }}
                 >
-                  <Link href="/contact">Schedule Call</Link>
+                  Schedule Call
                 </Button>
               </motion.div>
             </div>

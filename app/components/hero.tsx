@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import { useContactModal } from "@/app/context/contact-modal-context"
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const { openModal } = useContactModal()
 
   useEffect(() => {
     if (videoRef.current) {
@@ -64,13 +66,12 @@ export function Hero() {
             className="space-x-4 mt-6"
           >
             <Button
-              asChild
+              asChild={false}
               size="lg"
               className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:scale-[1.02] transition-transform duration-300"
+              onClick={openModal}
             >
-              <Link href="#contact">
-                Schedule Your Consultation <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              Schedule Your Consultation <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
         </div>

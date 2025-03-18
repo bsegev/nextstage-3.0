@@ -31,8 +31,8 @@ const showcaseItems: ShowcaseItem[] = [
     bgImage: "/showcase/ai-podcast-bg.jpg"
   },
   {
-    title: "Banking Platform",
-    descr: "MOBILE APP",
+    title: "Digital Bank",
+    descr: "DASHBOARD",
     image: "/showcase/bank-comparison.png",
     bgImage: "/showcase/bank-bg.png"
   },
@@ -50,7 +50,7 @@ const showcaseItems: ShowcaseItem[] = [
   },
   {
     title: "Health & Wellness",
-    descr: "MOBILE APP",
+    descr: "WEBSITE",
     image: "/showcase/weight-loss-comparison.png",
     bgImage: "/showcase/weight-loss-bg.png"
   }
