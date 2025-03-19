@@ -125,7 +125,7 @@ export default function SynergyDiagram() {
               From where you are<span className="animated-gradient">to where you want to go</span>
             </h2>
             <p className="text-muted-foreground md:text-xl">
-              An integrated approach to turn your ideas into market-ready solutions through the synergy of strategy, design, and technology. Our solutions are designed to help you get up and running as quickly as possible without compromising quality. Whether you are looking to get your first customer, secure your first investor, launch your product, or grow your digital presence, I can help.
+              Turning ideas into market-ready solutions by uniting strategy, design, and technology. From first customer or investor to product launch, I help founders move fast without compromising quality.
             </p>
           </div>
         </motion.div>

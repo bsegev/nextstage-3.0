@@ -54,9 +54,7 @@ export function Hero() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="mx-auto max-w-[700px] text-muted-foreground md:text-xl"
             >
-              Your business deserves more than just a good idea — it needs tools that deliver results. At NextStage,
-              I empower companies to scale through market-ready branding, compelling design, customer-validated MVP
-              development, and strategic guidance — all under one roof.
+              Beyond ideas, your business needs tools that deliver. I help companies scale through market-ready branding, validated MVPs, and strategic guidance — all under one roof.
             </motion.p>
           </div>
           <motion.div 
