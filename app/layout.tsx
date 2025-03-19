@@ -33,6 +33,12 @@ export const metadata = {
   title: "NextStage - Transform your startup vision into reality",
   description:
     "Strategically designed MVPs, powerful branding, and investor-ready assets—crafted precisely to take you from idea to growth.",
+  icons: {
+    icon: [
+      { url: '/images/favicon.svg' },
+    ],
+    shortcut: '/images/favicon.svg',
+  },
 }
 
 export default function RootLayout({

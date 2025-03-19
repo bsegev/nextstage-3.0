@@ -38,7 +38,19 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-3">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="w-8 h-8"
+          >
+            <img 
+              src="/images/logo-mark-gradient.svg" 
+              alt="NextStage Logo" 
+              className="w-full h-full"
+            />
+          </motion.div>
           <motion.span 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
