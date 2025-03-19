@@ -54,7 +54,7 @@ export function Testimonials() {
   const isInView = useInView(sectionRef, { amount: 0.3, once: true })
 
   return (
-    <section ref={sectionRef} className="w-full py-12 md:py-24 bg-gradient-to-b from-slate-50 to-white">
+    <section ref={sectionRef} className="w-full py-12 md:py-24 bg-gradient-to-b from-slate-50 to-white relative z-10">
       <div className="container px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
