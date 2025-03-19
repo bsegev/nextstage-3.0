@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useContactModal } from "@/app/context/contact-modal-context"
@@ -15,32 +16,70 @@ export function FoundersNote() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto"
+          className="max-w-7xl mx-auto"
         >
           <div className="relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 rounded-2xl"></div>
             <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-gray-100 shadow-xl shadow-gray-900/5">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight font-serif mb-8">
-                Founder&apos;s Note
-              </h2>
-              <p className="text-gray-600 text-xl md:text-2xl mb-8 leading-relaxed font-light">
-                NextStage is the culmination of years helping businesses launch, scale, and find clarity. I&apos;m deeply committed to bringing this experience directly to you
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400">
-                  —because great businesses deserve thoughtful partnerships
-                </span>.
-              </p>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400"></div>
-                  <p className="text-xl font-bold text-gray-900">Ben Segev, Founder</p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                {/* Left Column - Background */}
+                <div className="flex flex-col space-y-8">
+                  <div className="space-y-6">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight font-serif">
+                      Meet the Founder
+                    </h2>
+                    <div className="space-y-4 text-gray-600">
+                      <p className="text-lg leading-relaxed">
+                        From founding a digital bank from scratch to crafting websites for visionary entrepreneurs, 
+                        I've spent the last decade building both software and physical products while working 
+                        shoulder-to-shoulder with teams across every aspect of business.
+                      </p>
+                      <p className="text-lg leading-relaxed">
+                        As a hands-on leader, I've personally driven design, marketing, and development initiatives—not 
+                        just directing but doing. This integrated approach helps me bridge the gap between vision and 
+                        execution, whether it's a complete digital transformation or a focused brand initiative.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <blockquote className="border-l-4 border-purple-500/50 pl-6 italic text-gray-600">
+                      "I'm here to help you build something meaningful. It's not just about delivering a 
+                      project—it's about creating lasting impact through thoughtful partnership."
+                    </blockquote>
+
+                    {/* Signature and Role */}
+                    <div className="flex items-center gap-4">
+                      <p className="text-xl font-bold text-gray-900">Ben Segev</p>
+                      <span className="text-gray-400">|</span>
+                      <p className="text-gray-600">Founder & Principal Consultant</p>
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 text-lg px-8 py-6 font-bold shadow-md shadow-purple-500/10 hover:scale-[1.02] w-full sm:w-auto mt-4"
+                    onClick={openModal}
+                  >
+                    Book an Appointment
+                  </Button>
                 </div>
-                <Button 
-                  asChild={false}
-                  className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 text-lg px-8"
-                  onClick={openModal}
-                >
-                  Schedule Your Strategy Call
-                </Button>
+
+                {/* Right Column - Image */}
+                <div className="flex items-center justify-center lg:justify-end h-full">
+                  <div className="w-full h-full max-h-[600px] relative rounded-xl overflow-hidden shadow-xl group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
+                    <Image 
+                      src="/images/headshot_web.png" 
+                      alt="Ben Segev" 
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                      priority
+                    />
+                    {/* Sophisticated gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 via-gray-900/5 to-transparent mix-blend-overlay"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 via-transparent to-blue-500/5"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

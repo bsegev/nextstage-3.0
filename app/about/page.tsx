@@ -1,8 +1,8 @@
 import { Header } from "../components/header"
 import { AboutHero } from "../components/about/hero"
 import { CoreNarrative } from "../components/about/core-narrative"
-import { WhyNextStage } from "../components/about/why-nextstage"
-import { FoundersNote } from "../components/about/founders-note"
+import { FoundersNote } from "@/app/components/about/founders-note"
+import { WhyNextStage } from "@/app/components/about/why-nextstage"
 import { Footer } from "../components/footer"
 
 export default function AboutPage() {
@@ -12,8 +12,8 @@ export default function AboutPage() {
       <main className="flex-1">
         <AboutHero />
         <CoreNarrative />
-        <WhyNextStage />
         <FoundersNote />
+        <WhyNextStage />
       </main>
       <Footer />
     </div>

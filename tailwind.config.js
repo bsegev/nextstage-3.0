@@ -20,6 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         serif: ["var(--font-fraunces)"],
+        kalam: ["var(--font-kalam)"],
       },
       colors: {
         border: "hsl(var(--border))",

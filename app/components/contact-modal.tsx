@@ -41,35 +41,35 @@ export function ContactModal() {
             
             <div className="grid gap-4">
               <Button 
-                className="w-full bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 flex items-center justify-center gap-2 h-auto py-4"
+                className="w-full bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 flex items-center justify-center gap-2 h-auto py-5 shadow-sm hover:shadow-md transition-all duration-300"
                 variant="outline"
                 onClick={copyEmail}
               >
-                <Mail className="h-5 w-5 text-purple-600" />
-                <span>{copied ? "Copied!" : "ben@nextstage.co"}</span>
-                <Copy className={`h-4 w-4 ml-2 transition-opacity ${copied ? 'text-green-500' : 'text-gray-400'}`} />
+                <Mail className="h-6 w-6 text-purple-600" />
+                <span className="text-lg">{copied ? "Copied!" : "ben@nextstage.co"}</span>
+                <Copy className={`h-5 w-5 ml-2 transition-opacity ${copied ? 'text-green-500' : 'text-gray-400'}`} />
               </Button>
               
               <Button 
-                className="w-full bg-[#0077b5] hover:bg-[#0369a1] text-white flex items-center justify-center gap-2 h-auto py-4"
+                className="w-full bg-[#0077b5] hover:bg-[#0369a1] text-white flex items-center justify-center gap-2 h-auto py-5 shadow-sm hover:shadow-md transition-all duration-300"
                 onClick={() => {
                   window.open("https://www.linkedin.com/in/bensegev/", "_blank")
                   closeModal()
                 }}
               >
-                <Linkedin className="h-5 w-5" />
-                <span>Connect on LinkedIn</span>
+                <Linkedin className="h-6 w-6" />
+                <span className="text-lg">Connect on LinkedIn</span>
               </Button>
               
               <Button 
-                className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white flex items-center justify-center gap-2 h-auto py-4"
+                className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white flex items-center justify-center gap-2 h-auto py-5 font-bold shadow-md shadow-purple-500/10 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02] transition-all duration-300"
                 onClick={() => {
                   window.open("https://cal.com/bensegev/30min", "_blank")
                   closeModal()
                 }}
               >
-                <Calendar className="h-5 w-5" />
-                <span>Schedule a 30min Call</span>
+                <Calendar className="h-6 w-6" />
+                <span className="text-lg">Schedule a 30min Call</span>
               </Button>
             </div>
           </motion.div>

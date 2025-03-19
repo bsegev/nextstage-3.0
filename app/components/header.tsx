@@ -81,7 +81,7 @@ export function Header() {
           >
             <Button 
               asChild={false}
-              className="ml-4 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+              className="ml-4 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 font-bold shadow-md shadow-purple-500/10 hover:scale-[1.02]"
               onClick={openModal}
             >
               Schedule Call
@@ -145,7 +145,7 @@ export function Header() {
               >
                 <Button 
                   asChild={false}
-                  className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white"
+                  className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white font-bold shadow-md shadow-purple-500/10 hover:shadow-lg hover:shadow-purple-500/20 py-3"
                   onClick={() => {
                     setIsOpen(false)
                     openModal()

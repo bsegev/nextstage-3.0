@@ -1,8 +1,9 @@
 import type React from "react"
 import "@/app/globals.css"
-import { Inter, Fraunces } from "next/font/google"
+import { Inter, Fraunces, Playfair_Display, Kalam } from "next/font/google"
 import { ContactModalProvider } from "./context/contact-modal-context"
 import { ContactModal } from "./components/contact-modal"
+import { cn } from "@/lib/utils"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,6 +15,18 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-fraunces",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+})
+
+const kalam = Kalam({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-kalam",
 })
 
 export const metadata = {
@@ -28,7 +41,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={cn(
+      "min-h-screen bg-white font-sans antialiased",
+      inter.variable,
+      fraunces.variable,
+      playfair.variable,
+      kalam.variable
+    )}>
       <body>
         <ContactModalProvider>
           {children}

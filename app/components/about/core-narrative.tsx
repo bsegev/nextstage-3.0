@@ -39,7 +39,7 @@ export function CoreNarrative() {
             >
               <div className="absolute -left-8 top-0 h-full w-[2px] bg-gradient-to-b from-purple-600/20 via-blue-500/20 to-cyan-400/20"></div>
               <p className="text-gray-600 text-xl md:text-2xl leading-relaxed font-light">
-                Aligning freelancers, navigating misaligned visions, hiring internally—it can feel harder than building your business itself.
+                Aligning freelancers, navigating misaligned visions, hiring internally – it can feel harder than building your business itself.
               </p>
               <div className="mt-8 pl-6 border-l-2 border-gray-100">
                 <p className="text-gray-900 text-xl md:text-2xl leading-relaxed">
@@ -67,7 +67,7 @@ export function CoreNarrative() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 font-medium">
                   Thoughtful, strategic, beautifully crafted work shouldn't break the bank
                 </span>
-                —it should be accessible, effective, and seamless.
+                 , it should be accessible, effective, and seamless.
               </p>
             </motion.div>
           </div>

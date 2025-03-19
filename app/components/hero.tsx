@@ -68,10 +68,10 @@ export function Hero() {
             <Button
               asChild={false}
               size="lg"
-              className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:scale-[1.02] transition-transform duration-300"
+              className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:scale-[1.02] transition-transform duration-300 font-bold text-lg px-8 py-7 shadow-lg shadow-purple-600/20 hover:shadow-xl hover:shadow-purple-600/30"
               onClick={openModal}
             >
-              Schedule Your Consultation <ArrowRight className="ml-2 h-4 w-4" />
+              Schedule Your Consultation <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>
         </div>

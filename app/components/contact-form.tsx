@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { Copy, Linkedin, Calendar, Mail } from "lucide-react"
+import { Copy, Linkedin, Calendar, Mail, ArrowRight } from "lucide-react"
 import { useContactModal } from "@/app/context/contact-modal-context"
 
 export function ContactForm() {
@@ -42,32 +42,46 @@ export function ContactForm() {
               </p>
             </div>
             
-            <div className="grid gap-4">
-              <Button 
-                className="w-full bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 flex items-center justify-center gap-2 h-auto py-4"
-                variant="outline"
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <button 
                 onClick={copyEmail}
+                className="group flex flex-col items-center justify-center p-6 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 text-center"
               >
-                <Mail className="h-5 w-5 text-purple-600" />
-                <span>{copied ? "Copied!" : "ben@nextstage.co"}</span>
-                <Copy className={`h-4 w-4 ml-2 transition-opacity ${copied ? 'text-green-500' : 'text-gray-400'}`} />
-              </Button>
+                <Mail className="h-8 w-8 text-purple-600 mb-3" />
+                <span className="text-sm font-medium text-gray-800">Email</span>
+                <span className="text-xs text-gray-500 mt-1">ben@nextstage.co</span>
+                <div className="mt-3 flex items-center gap-1 text-purple-600">
+                  <Copy className={`h-4 w-4 transition-all ${copied ? 'text-green-500' : 'opacity-50 group-hover:opacity-100'}`} />
+                  <span className="text-xs font-medium">{copied ? "Copied!" : "Copy"}</span>
+                  <ArrowRight className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-all" />
+                </div>
+              </button>
               
-              <Button 
-                className="w-full bg-[#0077b5] hover:bg-[#0369a1] text-white flex items-center justify-center gap-2 h-auto py-4"
+              <button 
                 onClick={() => window.open("https://www.linkedin.com/in/bensegev/", "_blank")}
+                className="group flex flex-col items-center justify-center p-6 rounded-xl bg-[#0077b5] hover:bg-[#0369a1] text-white shadow-md hover:shadow-lg transition-all duration-300 text-center"
               >
-                <Linkedin className="h-5 w-5" />
-                <span>Connect on LinkedIn</span>
-              </Button>
+                <Linkedin className="h-8 w-8 mb-3" />
+                <span className="text-sm font-medium">LinkedIn</span>
+                <span className="text-xs opacity-75 mt-1">Professional Network</span>
+                <div className="mt-3 flex items-center gap-1 opacity-50 group-hover:opacity-100 transition-all">
+                  <span className="text-xs font-medium">Connect</span>
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </button>
               
-              <Button 
-                className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white flex items-center justify-center gap-2 h-auto py-4"
+              <button 
                 onClick={() => window.open("https://cal.com/bensegev/30min", "_blank")}
+                className="group flex flex-col items-center justify-center p-6 rounded-xl bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white shadow-lg shadow-purple-500/10 hover:shadow-xl hover:shadow-purple-500/20 hover:scale-[1.02] transition-all duration-300 text-center"
               >
-                <Calendar className="h-5 w-5" />
-                <span>Book Appointment</span>
-              </Button>
+                <Calendar className="h-8 w-8 mb-3" />
+                <span className="text-sm font-medium">Schedule</span>
+                <span className="text-xs opacity-75 mt-1">30min Strategy Call</span>
+                <div className="mt-3 flex items-center gap-1 opacity-50 group-hover:opacity-100 transition-all">
+                  <span className="text-xs font-medium">Book Now</span>
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </button>
             </div>
           </div>
         </div>

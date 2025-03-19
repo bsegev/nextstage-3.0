@@ -13,36 +13,36 @@ export default function Pricing() {
       title: "Essential",
       description: "Quick & premium design execution with strategic thinking embedded into every asset. Perfect for establishing a strong foundation quickly.",
       perfectFor: "Quick-start projects",
-      timeEstimate: "1 - 2 weeks",
+      scopeOfValue: "Deliverables only",
       investment: "$",
-      tags: ["Design"],
+      tags: ["1–2 week project"],
       featured: false,
     },
     {
       title: "Signature",
       description: "Premium design execution paired with weekly strategy sessions. Get hands-on guidance to shape your brand's direction and growth strategy.",
       perfectFor: "Early-stage startups",
-      timeEstimate: "3 weeks",
+      scopeOfValue: "Deliverables + Guidance",
       investment: "$$",
-      tags: ["Design", "Strategy"],
+      tags: ["6–8 week engagement"],
       featured: true,
     },
     {
       title: "Prestige",
       description: "Your dedicated co-pilot for design, strategy, and tech. Direct collaboration with me to architect and execute your complete business presence.",
       perfectFor: "Funded companies",
-      timeEstimate: "4 - 6 weeks",
+      scopeOfValue: "Deliverables + Strategy + Support",
       investment: "$$$",
-      tags: ["Design", "Strategy", "Tech"],
+      tags: ["Monthly partnership"],
       featured: false,
     },
     {
       title: "Tailored",
       description: "Fully custom, white-glove service—strategically blended and precisely tailored to your organization's exact needs.",
       perfectFor: "Custom partnerships",
-      timeEstimate: "TBD",
+      scopeOfValue: "Full-service Partnership",
       investment: "$ - $$$$",
-      tags: ["Custom-crafted"],
+      tags: ["Custom / Annual collaboration"],
       featured: false,
     }
   ];
@@ -149,8 +149,8 @@ export default function Pricing() {
                     </div>
                     <div className="border-t border-gray-800/50 pt-2 md:pt-3">
                       <div className="flex justify-between items-start">
-                        <span className="text-[13px] font-medium text-gray-400">Time estimate</span>
-                        <span className="text-[13px] text-gray-300 text-right">{tier.timeEstimate}</span>
+                        <span className="text-[13px] font-medium text-gray-400">Scope of Value</span>
+                        <span className="text-[13px] text-gray-300 text-right">{tier.scopeOfValue}</span>
                       </div>
                     </div>
                     <div className="border-t border-gray-800/50 pt-2 md:pt-3">

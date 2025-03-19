@@ -16,8 +16,8 @@ const principles = [
   },
   {
     number: "03",
-    title: "The best solutions emerge when vision meets engineering",
-    details: "Design is the bridge between them."
+    title: "The best solutions emerge when design meets engineering",
+    details: "Strategy is the bridge between them."
   },
   {
     number: "04",
@@ -82,17 +82,177 @@ export function WhyNextStage() {
 
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            {/* Left Column - Animation Space */}
+            {/* Left Column - Bulletin Board */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative min-h-[400px] bg-gradient-to-br from-purple-600/[0.04] via-blue-500/[0.04] to-cyan-400/[0.04] rounded-2xl"
+              className="relative min-h-[500px] lg:min-h-[480px] bg-slate-50 rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 lg:p-8 overflow-hidden"
             >
-              {/* Animation placeholder - will be replaced */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm text-slate-400">Animation coming soon</span>
+              {/* Subtle texture */}
+              <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-40" />
+              
+              {/* Grid of post-it notes */}
+              <div className="relative grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 h-full">
+                {[
+                  {
+                    text: "Build to\nLAST",
+                    color: "yellow",
+                    rotate: -2,
+                    scale: 1
+                  },
+                  {
+                    text: "We have\nVISION",
+                    color: "blue",
+                    rotate: 1,
+                    scale: 1
+                  },
+                  {
+                    text: "PEOPLE\nFIRST",
+                    color: "green",
+                    rotate: -1,
+                    scale: 1
+                  },
+                  {
+                    text: "Start from\nWHY",
+                    color: "pink",
+                    rotate: 2,
+                    scale: 1
+                  },
+                  {
+                    text: "Open\nMINDED",
+                    color: "purple",
+                    rotate: -3,
+                    scale: 1
+                  },
+                  {
+                    text: "We 🫶\ndigital",
+                    color: "orange",
+                    rotate: 1,
+                    scale: 1
+                  },
+                  {
+                    text: {
+                      part1: "DO",
+                      strike1: "N'T",
+                      space: " ",
+                      strike2: "QU",
+                      part2: "IT"
+                    },
+                    color: "yellow",
+                    rotate: -1,
+                    scale: 1
+                  },
+                  {
+                    text: "Design\nMATTERS",
+                    color: "blue",
+                    rotate: 2,
+                    scale: 1
+                  },
+                  {
+                    text: "Move\nFAST",
+                    color: "green",
+                    rotate: -2,
+                    scale: 1
+                  },
+                  {
+                    text: "Remote by\nDESIGN",
+                    color: "pink",
+                    rotate: 1,
+                    scale: 1
+                  },
+                  {
+                    text: "Stay\nAGILE",
+                    color: "purple",
+                    rotate: -1,
+                    scale: 1
+                  },
+                  {
+                    text: "Think\nBIG",
+                    color: "orange",
+                    rotate: 2,
+                    scale: 1
+                  }
+                ].map((note, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: i * 0.1,
+                      ease: [0.22, 1, 0.36, 1]
+                    }}
+                    className={`
+                      post-it w-full aspect-square p-2 sm:p-3 md:p-4 transition-all duration-300
+                      transform cursor-pointer
+                      ${note.color === 'yellow' && 'bg-amber-100'}
+                      ${note.color === 'blue' && 'bg-sky-100'}
+                      ${note.color === 'green' && 'bg-emerald-100'}
+                      ${note.color === 'pink' && 'bg-pink-100'}
+                      ${note.color === 'purple' && 'bg-purple-100'}
+                      ${note.color === 'orange' && 'bg-orange-100'}
+                    `}
+                    style={{
+                      ['--rotate' as string]: `${note.rotate}deg`,
+                      rotate: `${note.rotate}deg`,
+                      scale: note.scale,
+                    } as const}
+                  >
+                    <div className="h-full w-full flex items-center justify-center text-center">
+                      {typeof note.text === 'string' ? (
+                        <p className={`
+                          font-kalam text-sm sm:text-base md:text-lg font-bold whitespace-pre-line leading-tight
+                          ${note.color === 'yellow' && 'text-amber-900'}
+                          ${note.color === 'blue' && 'text-sky-900'}
+                          ${note.color === 'green' && 'text-emerald-900'}
+                          ${note.color === 'pink' && 'text-pink-900'}
+                          ${note.color === 'purple' && 'text-purple-900'}
+                          ${note.color === 'orange' && 'text-orange-900'}
+                        `}
+                        style={{
+                          fontFamily: 'var(--font-kalam)',
+                        }}
+                        >
+                          {note.text}
+                        </p>
+                      ) : (
+                        <p className={`
+                          font-kalam text-sm sm:text-base md:text-lg font-bold leading-tight
+                          ${note.color === 'yellow' && 'text-amber-900'}
+                        `}
+                        style={{
+                          fontFamily: 'var(--font-kalam)',
+                        }}
+                        >
+                          <span className="flex flex-col items-center gap-1 sm:gap-2">
+                            <span className="flex items-center">
+                              <span>{note.text.part1}</span>
+                              <span className="relative">
+                                <span className="text-amber-600/90">{note.text.strike1}</span>
+                                <span className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-700/90 -rotate-6"></span>
+                              </span>
+                            </span>
+                            <span className="flex items-center">
+                              <span className="relative">
+                                <span className="text-amber-600/90">{note.text.strike2}</span>
+                                <span className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-700/90 -rotate-6"></span>
+                              </span>
+                              <span>{note.text.part2}</span>
+                            </span>
+                          </span>
+                        </p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
+
+              {/* Decorative pins */}
+              <div className="absolute top-6 left-6 w-3 h-3 rounded-full bg-slate-400 shadow-inner" />
+              <div className="absolute top-6 right-6 w-3 h-3 rounded-full bg-slate-400 shadow-inner" />
+              <div className="absolute bottom-6 left-6 w-3 h-3 rounded-full bg-slate-400 shadow-inner" />
+              <div className="absolute bottom-6 right-6 w-3 h-3 rounded-full bg-slate-400 shadow-inner" />
             </motion.div>
 
             {/* Right Column - Principles */}

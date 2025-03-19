@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 export function AboutHero() {
   return (
@@ -19,34 +18,36 @@ export function AboutHero() {
             className="max-w-xl"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight font-serif mb-6">
-              Less Juggling.{" "}
-              <span className="animated-gradient block mt-2">More Building.</span>
+              Making Complex{" "}
+              <span className="animated-gradient block mt-2">Crystal Clear.</span>
             </h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-xl md:text-2xl text-muted-foreground font-light max-w-md"
+              className="text-xl md:text-2xl text-muted-foreground font-light max-w-md leading-relaxed"
             >
-              Bringing enterprise-level strategy and design to growing businesses
+              Transforming intricate business challenges into elegant, effortless solutions
             </motion.p>
           </motion.div>
 
-          {/* Image/Visual */}
+          {/* Video/Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative aspect-square md:aspect-[4/3] w-full max-w-md mx-auto md:max-w-none overflow-hidden rounded-2xl"
+            className="relative aspect-square md:aspect-[4/3] w-full max-w-md mx-auto md:max-w-none overflow-hidden rounded-2xl bg-black/5"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-500/20 to-cyan-400/20 rounded-2xl"></div>
-            <Image
-              src="/images/about-hero.jpg"
-              alt="NextStage workspace"
-              fill
-              className="object-cover rounded-2xl"
-              priority
-            />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-500/20 to-cyan-400/20 rounded-2xl mix-blend-overlay"></div>
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-full object-cover rounded-2xl"
+            >
+              <source src="/videos/crystal.mp4" type="video/mp4" />
+            </video>
           </motion.div>
         </div>
       </div>

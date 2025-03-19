@@ -399,10 +399,10 @@ export function Services() {
               </div>
               <button 
                 onClick={openModal}
-                className="inline-flex items-center justify-center space-x-2 px-6 py-2.5 text-[13px] font-medium border rounded-xl border-purple-600/20 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.08] via-blue-500/[0.08] to-cyan-400/[0.08] hover:from-purple-600 hover:via-blue-500 hover:to-cyan-400 hover:text-white transition-all duration-300 group"
+                className="inline-flex items-center justify-center space-x-2 px-8 py-4 mt-4 text-base font-bold border-2 rounded-xl border-purple-600/30 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.15] via-blue-500/[0.15] to-cyan-400/[0.15] hover:from-purple-600 hover:via-blue-500 hover:to-cyan-400 hover:text-white transition-all duration-300 group shadow-lg shadow-purple-500/10 hover:shadow-xl hover:shadow-purple-500/20 text-purple-700 hover:scale-[1.02]"
               >
-                <span>Schedule a consultation</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-150" />
+                <span className="font-bold">Schedule a consultation</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-150" />
               </button>
             </div>
           </motion.div>
