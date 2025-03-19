@@ -15,7 +15,7 @@ export default function Pricing() {
       perfectFor: "Quick-start projects",
       scopeOfValue: "Deliverables only",
       investment: "$",
-      tags: ["1–2 week project"],
+      tags: ["1–4 week project"],
       featured: false,
     },
     {

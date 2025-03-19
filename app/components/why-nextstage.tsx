@@ -16,14 +16,14 @@ const features = [
   {
     icon: Sparkles,
     title: "Adaptive Collaboration",
-    description: "Services flexibly tailored to your evolving needs—seamlessly scaling with your business without friction.",
+    description: "Services flexibly tailored to your evolving needs. Seamlessly scaling with your business without friction.",
     gradientFrom: "from-cyan-500",
     gradientTo: "to-cyan-300",
   },
   {
     icon: Users,
     title: "One Expert, End-to-End",
-    description: "Direct partnership means clarity, accountability, and expert-quality results—no layers, no confusion.",
+    description: "Direct partnership means clarity, accountability, and expert-quality results – no layers, no confusion.",
     gradientFrom: "from-indigo-600",
     gradientTo: "to-indigo-400",
   },
