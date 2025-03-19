@@ -74,7 +74,7 @@ export function WhyNextStage() {
               <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm">
                 Principles & Approach
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif [font-feature-settings:'swsh'_1,'salt'_1,'ss01'_1,'ss02'_1]">
                 Lessons Learned & <span className="animated-gradient">Applied Daily</span>
               </h2>
             </div>

@@ -15,6 +15,7 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-fraunces",
+  axes: ['WONK', 'SOFT', 'opsz'],
 })
 
 const playfair = Playfair_Display({

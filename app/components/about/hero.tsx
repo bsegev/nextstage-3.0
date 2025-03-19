@@ -18,8 +18,8 @@ export function AboutHero() {
             className="max-w-xl"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight font-serif mb-6">
-              Making Complex{" "}
-              <span className="animated-gradient block mt-2">Crystal Clear.</span>
+              Making the complex{" "}
+              <span className="animated-gradient block mt-2">crystal clear.</span>
             </h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
