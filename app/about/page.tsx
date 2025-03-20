@@ -4,6 +4,7 @@ import { CoreNarrative } from "../components/about/core-narrative"
 import { FoundersNote } from "@/app/components/about/founders-note"
 import { WhyNextStage } from "@/app/components/about/why-nextstage"
 import { AboutTestimonials } from "@/app/components/about/testimonials"
+import { AboutCTA } from "@/app/components/about/cta"
 import { Footer } from "../components/footer"
 
 export default function AboutPage() {
@@ -16,6 +17,7 @@ export default function AboutPage() {
         <FoundersNote />
         <WhyNextStage />
         <AboutTestimonials />
+        <AboutCTA />
       </main>
       <Footer />
     </div>
