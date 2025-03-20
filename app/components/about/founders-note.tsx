@@ -30,9 +30,9 @@ export function FoundersNote() {
                     </h2>
                     <div className="space-y-4 text-gray-600">
                       <p className="text-lg leading-relaxed">
-                        From founding a digital bank from scratch to crafting websites for visionary entrepreneurs, 
+                        From helping establish a digital bank to crafting websites for visionary entrepreneurs, 
                         I've spent the last decade building both software and physical products while working 
-                        shoulder-to-shoulder with teams across every aspect of business.
+                        shoulder-to-shoulder with founders across every stage of business development.
                       </p>
                       <p className="text-lg leading-relaxed">
                         As a hands-on leader, I've personally driven design, marketing, and development initiatives—not 
