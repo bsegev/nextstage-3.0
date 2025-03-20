@@ -34,13 +34,6 @@ const testimonials = [
     tags: ["Pitch Deck", "AI Renderings", "Investor Materials", "Website", "Portfolio CMS"]
   },
   {
-    quote: "The depth of expertise and attention to detail Ben brings to every project is remarkable. He truly understands how to leverage technology for business growth.",
-    name: "Scott H.",
-    designation: "Owner & CEO @ Costa Rica Recovery",
-    src: "/videos/logo-anim/CRR_logo_anim_loop (1).mp4",
-    tags: ["Branding", "Website", "Sales Decks", "Document Templates", "Copywriting", "LinkedIn Optimization", "Explainer Videos"]
-  },
-  {
     quote: "Ben brought fresh ideas and technical expertise to our marketing initiatives. His ability to blend creativity with data-driven decisions helped us achieve remarkable results.",
     name: "James S.",
     designation: "Marketing Lead @ SwissHUB",
