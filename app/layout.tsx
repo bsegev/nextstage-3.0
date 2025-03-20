@@ -40,6 +40,29 @@ export const metadata = {
     ],
     shortcut: '/images/favicon.svg',
   },
+  openGraph: {
+    title: "NextStage",
+    description: "Transform your startup vision into reality",
+    url: "https://nextstage.digital",
+    siteName: "NextStage",
+    images: [
+      {
+        url: "/images/og/nextstage-og.png",
+        width: 500,
+        height: 500,
+        alt: "NextStage"
+      }
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "NextStage",
+    description: "Transform your startup vision into reality",
+    images: ["/images/og/nextstage-og.png"],
+    creator: "@nextstage",
+  },
 }
 
 export default function RootLayout({
