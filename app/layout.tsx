@@ -31,6 +31,7 @@ const kalam = Kalam({
 })
 
 export const metadata = {
+  metadataBase: new URL('https://nextstage.co'),
   title: "NextStage - Transform your startup vision into reality",
   description:
     "Strategically designed MVPs, powerful branding, and investor-ready assets—crafted precisely to take you from idea to growth.",
