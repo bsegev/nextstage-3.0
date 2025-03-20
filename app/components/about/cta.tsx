@@ -41,7 +41,7 @@ export function AboutCTA() {
             <Link href="/#services">
               <Button 
                 size="lg"
-                className="inline-flex items-center justify-center px-8 py-7 text-base font-bold border-2 rounded-lg border-purple-600/30 hover:border-purple-600 bg-gradient-to-r from-purple-600/[0.05] via-blue-500/[0.05] to-cyan-400/[0.05] hover:from-purple-600/10 hover:via-blue-500/10 hover:to-cyan-400/10 transition-all duration-300 text-slate-800 hover:text-slate-900 w-full sm:w-auto"
+                className="inline-flex items-center justify-center px-8 py-7 text-base font-bold rounded-lg bg-blue-500 text-white hover:bg-blue-600 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 w-full sm:w-auto"
               >
                 Explore Services
               </Button>
