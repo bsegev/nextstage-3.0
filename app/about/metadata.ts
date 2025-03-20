@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NextStage",
     description: "About - Our Story & Approach",
-    url: "https://nextstage.digital/about",
     siteName: "NextStage",
+    url: "https://nextstage.co/about",
     images: [
       {
         url: "/images/og/nextstage-og.png",

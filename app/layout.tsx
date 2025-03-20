@@ -43,8 +43,8 @@ export const metadata = {
   openGraph: {
     title: "NextStage",
     description: "Transform your startup vision into reality",
-    url: "https://nextstage.digital",
     siteName: "NextStage",
+    url: "https://nextstage.co",
     images: [
       {
         url: "/images/og/nextstage-og.png",
