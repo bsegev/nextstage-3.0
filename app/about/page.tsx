@@ -6,6 +6,9 @@ import { WhyNextStage } from "@/app/components/about/why-nextstage"
 import { AboutTestimonials } from "@/app/components/about/testimonials"
 import { AboutCTA } from "@/app/components/about/cta"
 import { Footer } from "../components/footer"
+import { metadata } from "./metadata"
+
+export { metadata }
 
 export default function AboutPage() {
   return (
