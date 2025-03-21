@@ -1,18 +1,15 @@
-import React, { ReactNode, useState } from 'react';
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent
-} from "@/components/ui/tooltip";
+"use client";
 
-interface LinkPreviewProps {
+import React, { useState } from 'react';
+import { Tooltip } from './tooltip';
+
+export interface LinkPreviewProps {
   url: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   thumbnailUrl?: string;
-  children: ReactNode;
   disabled?: boolean;
+  children: React.ReactNode;
 }
 
 export function LinkPreview({
@@ -20,58 +17,67 @@ export function LinkPreview({
   title,
   description,
   thumbnailUrl,
+  disabled = false,
   children,
-  disabled = false
 }: LinkPreviewProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = (e: React.MouseEvent) => {
     if (disabled) {
       e.preventDefault();
       return;
     }
+    
+    setIsClicked(true);
+    
+    // Navigate to URL 
+    window.open(url, "_blank", "noopener,noreferrer");
+    
+    // Reset click state after animation
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 500);
   };
 
-  if (disabled) {
-    return <div onClick={(e) => e.preventDefault()}>{children}</div>;
-  }
+  const renderTooltipContent = () => {
+    return (
+      <div className="w-full">
+        {thumbnailUrl && (
+          <div className="aspect-video w-full mb-2 rounded-md overflow-hidden bg-gray-100">
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${thumbnailUrl})` }}
+            />
+          </div>
+        )}
+        
+        {title && (
+          <h4 className="font-medium text-gray-900 mb-1 truncate">
+            {title}
+          </h4>
+        )}
+        
+        {description && (
+          <p className="text-gray-500 text-xs line-clamp-2">
+            {description}
+          </p>
+        )}
+      </div>
+    );
+  };
 
   return (
-    <TooltipProvider>
-      <Tooltip open={isOpen} onOpenChange={setIsOpen}>
-        <TooltipTrigger asChild>
-          <a 
-            href={url} 
-            onClick={handleClick}
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
-            className="block"
-          >
-            {children}
-          </a>
-        </TooltipTrigger>
-        <TooltipContent 
-          side="top"
-          align="center"
-          className="max-w-md p-0 border-0 shadow-xl"
-        >
-          <div className="overflow-hidden bg-white rounded-lg shadow-lg">
-            {thumbnailUrl && (
-              <div className="w-full h-36 bg-gray-100 overflow-hidden">
-                <img 
-                  src={thumbnailUrl} 
-                  alt={title} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div className="p-4">
-              <h3 className="font-medium text-base text-gray-900">{title}</h3>
-              <p className="mt-1 text-sm text-gray-500 line-clamp-2">{description}</p>
-            </div>
-          </div>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <div 
+      className={`relative ${isClicked ? 'scale-95' : 'scale-100'} transition-transform duration-300`}
+      onClick={handleClick}
+    >
+      {disabled ? (
+        <div>{children}</div>
+      ) : (
+        <Tooltip content={renderTooltipContent()}>
+          <div className="cursor-pointer">{children}</div>
+        </Tooltip>
+      )}
+    </div>
   );
 } 

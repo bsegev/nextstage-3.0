@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowUpIcon } from '@heroicons/react/24/outline';
 
-interface TooltipProps {
+export interface TooltipProps {
   children: React.ReactNode;
   content: React.ReactNode;
   className?: string;
@@ -37,7 +37,7 @@ export function Tooltip({ children, content, className }: TooltipProps) {
 
   return (
     <div
-      className="relative inline-block group"
+      className="relative inline-block group z-50"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
@@ -98,13 +98,13 @@ export function Tooltip({ children, content, className }: TooltipProps) {
             }}
             className="absolute top-full mt-2 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center rounded-lg bg-white shadow-xl px-4 py-3 text-xs z-[9999]"
           >
-            {/* Arrow */}
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-white" />
-            
             {/* Content */}
-            <div className="relative z-30">
+            <div className="relative z-30 w-full">
               {content}
             </div>
+
+            {/* Arrow */}
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-white" />
 
             {/* Decorative elements */}
             <div className="absolute inset-x-6 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-primary-500 to-transparent h-px" />

@@ -66,8 +66,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
               : "View featured projects and experiments in this category."}
             thumbnailUrl={thumbnails?.[0]}
           >
-            <div className="group relative px-6 py-4 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 rounded-xl overflow-hidden shadow-md text-center cursor-pointer">
-              <span className="relative z-10 font-medium text-base text-white flex items-center justify-center gap-2">
+            <div className="group relative px-6 py-4 bg-gray-800 hover:bg-gray-900 transition-all duration-300 rounded-xl overflow-hidden shadow-md text-center cursor-pointer">
+              <span className="relative z-10 font-mono text-base text-white flex items-center justify-center gap-2">
                 <span>
                   {title === "Better LLM Prompting" ? "Get the Book" :
                    title === "Micro Projects & MVPs" ? "Try Digital Paint" :
@@ -121,13 +121,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
                   setTimeout(() => tooltip.remove(), 300);
                 }, 2000);
               }}
-              className="group relative px-6 py-4 bg-white hover:bg-white/90 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-gray-200 text-center cursor-help"
+              className="group relative px-6 py-4 bg-white hover:bg-gray-50 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-gray-200 text-center cursor-help"
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02] opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100"
                 transition={{ duration: 0.3 }}
               />
-              <span className="relative z-10 font-medium text-base text-gray-800 flex items-center justify-center gap-2">
+              <span className="relative z-10 font-mono text-base text-gray-800 flex items-center justify-center gap-2">
                 <span>
                   {title === "Better LLM Prompting" ? "Explore Resources" :
                    title === "Micro Projects & MVPs" ? "All Experiments" :
