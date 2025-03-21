@@ -41,14 +41,58 @@ export function CoreNarrative() {
               <p className="text-gray-600 text-xl md:text-2xl leading-relaxed font-light">
                 Aligning freelancers, navigating misaligned visions, hiring internally – it can feel harder than building your business itself.
               </p>
-              <div className="mt-8 pl-6 border-l-2 border-gray-100">
-                <p className="text-gray-900 text-xl md:text-2xl leading-relaxed">
-                  Designers disconnected from strategy.
-                  <br />
-                  Strategists detached from execution.
-                  <br />
-                  Complex hiring processes that drain your resources.
-                </p>
+              <div className="mt-8 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 flex-shrink-0">
+                    <svg className="w-8 h-8" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="chevronGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#8b5cf6" />
+                          <stop offset="50%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#06b6d4" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M186 136 C236 216 236 296 186 376 L326 256 L186 136Z" fill="url(#chevronGradient1)" stroke="none" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-900 text-xl md:text-2xl leading-relaxed">
+                    Designers disconnected from strategy.
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 flex-shrink-0">
+                    <svg className="w-8 h-8" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="chevronGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#8b5cf6" />
+                          <stop offset="50%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#06b6d4" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M186 136 C236 216 236 296 186 376 L326 256 L186 136Z" fill="url(#chevronGradient2)" stroke="none" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-900 text-xl md:text-2xl leading-relaxed">
+                    Strategists detached from execution.
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 flex-shrink-0">
+                    <svg className="w-8 h-8" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="chevronGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#8b5cf6" />
+                          <stop offset="50%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#06b6d4" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M186 136 C236 216 236 296 186 376 L326 256 L186 136Z" fill="url(#chevronGradient3)" stroke="none" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-900 text-xl md:text-2xl leading-relaxed">
+                    Complex hiring processes that drain your resources.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
