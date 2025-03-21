@@ -435,4 +435,14 @@ h1, h2, h3, p, div {
   animation: none;
 }
 
+@layer utilities {
+  .aurora-text-gradient-light {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500;
+  }
+
+  .text-ethereal-dark {
+    @apply text-gray-800;
+  }
+}
+
 
