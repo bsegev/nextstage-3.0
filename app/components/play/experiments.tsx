@@ -365,11 +365,11 @@ export function PlayExperiments() {
 
   return (
     <>
-      <section className="relative py-32 overflow-hidden bg-gray-50/50">
+      <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.04]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02]"></div>
         </div>
 
         <div className="relative z-10 container mx-auto px-6">
