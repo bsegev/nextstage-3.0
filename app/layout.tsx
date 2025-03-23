@@ -37,9 +37,10 @@ export const metadata = {
     "Strategically designed MVPs, powerful branding, and investor-ready assets—crafted precisely to take you from idea to growth.",
   icons: {
     icon: [
-      { url: '/images/favicon.svg' },
+      { url: '/images/logo-mark-gradient.svg' },
     ],
-    shortcut: '/images/favicon.svg',
+    shortcut: '/images/logo-mark-gradient.svg',
+    apple: '/images/logo-mark-gradient.svg',
   },
   openGraph: {
     title: "NextStage",
