@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Paintbrush, Eraser, Save, ArrowLeft, ArrowRight, Trash, PaintBucket } from 'lucide-react';
 
 const MAX_HISTORY = 20; // Limit history size to prevent memory bloat
-const CANVAS_WIDTH = 1800;
-const CANVAS_HEIGHT = 900; // Changed from 1800 to 900 for a 2:1 aspect ratio
 
 const colors = [
   '#000000', '#808080', '#800000', '#808000', '#008000', '#008080', '#000080', '#800080', '#808040', '#004040', '#0080FF', '#004080', '#8000FF', '#804000',
@@ -59,7 +57,7 @@ export function PlayPaint() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Initialize canvas and context
+  // Initialize canvas and context with proper dimensions
   useEffect(() => {
     // Ensure we're on the client side
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
@@ -70,23 +68,62 @@ export function PlayPaint() {
     const context = canvas.getContext('2d');
     if (!context) return;
     
-    contextRef.current = context;
-    context.fillStyle = '#FFFFFF';
-    context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    // Update canvas dimensions based on actual container size
+    const updateCanvasDimensions = () => {
+      if (canvasContainerRef.current) {
+        const containerWidth = canvasContainerRef.current.clientWidth;
+        const containerHeight = canvasContainerRef.current.clientHeight;
+        
+        // Use an aspect ratio that matches the container
+        const aspectRatio = containerWidth / containerHeight;
+        
+        // Set canvas internal dimensions to match container's aspect ratio
+        // but keep resolution high for quality
+        if (isMobile) {
+          // Lower resolution for mobile to improve performance
+          canvas.width = Math.round(1200 * aspectRatio);
+          canvas.height = 1200;
+        } else {
+          canvas.width = Math.round(1800 * aspectRatio);
+          canvas.height = 1800;
+        }
+        
+        // Clear and redraw content if we had any
+        if (history.length > 0 && currentStep >= 0) {
+          context.putImageData(history[currentStep], 0, 0);
+        } else {
+          // Initial state
+          context.fillStyle = '#FFFFFF';
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          
+          // Save initial state
+          const initialState = context.getImageData(0, 0, canvas.width, canvas.height);
+          setHistory([initialState]);
+          setCurrentStep(0);
+        }
+      }
+    };
     
-    // Save initial state
-    const initialState = context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    setHistory([initialState]);
-    setCurrentStep(0);
-
+    // Set up context
+    contextRef.current = context;
+    
+    // Initial setup
+    updateCanvasDimensions();
+    
+    // Update dimensions on resize
+    window.addEventListener('resize', updateCanvasDimensions);
+    
     // Cleanup function
     return () => {
-      context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      window.removeEventListener('resize', updateCanvasDimensions);
+      if (context) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
       contextRef.current = null;
       setHistory([]);
       setCurrentStep(-1);
     };
-  }, []);
+  }, [isMobile, history, currentStep]);
 
   const saveToHistory = () => {
     // Ensure we're on the client side
@@ -94,8 +131,11 @@ export function PlayPaint() {
     
     const context = contextRef.current;
     if (!context) return;
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const currentState = context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    const currentState = context.getImageData(0, 0, canvas.width, canvas.height);
     
     // Limit history size by removing oldest entries when exceeding MAX_HISTORY
     const newHistory = history.slice(Math.max(0, currentStep + 1 - MAX_HISTORY), currentStep + 1);
@@ -144,28 +184,11 @@ export function PlayPaint() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     
-    // Get the canvas context
-    const context = canvas.getContext('2d');
-    if (!context) return;
-    
-    // Get the current image data from the original canvas
-    const imageData = context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    
-    // Create a new canvas with the exact dimensions of our drawing canvas
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = CANVAS_WIDTH;
-    exportCanvas.height = CANVAS_HEIGHT;
-    const exportContext = exportCanvas.getContext('2d');
-    
-    if (!exportContext) return;
-    
-    // Put the image data directly onto the export canvas
-    exportContext.putImageData(imageData, 0, 0);
-    
-    // Create download link with the export canvas data
+    // Export directly from the canvas
+    // This will match exactly what is shown since we're using the actual canvas dimensions
     const link = document.createElement('a');
     link.download = 'my-painting.png';
-    link.href = exportCanvas.toDataURL('image/png');
+    link.href = canvas.toDataURL('image/png');
     link.click();
   };
 
@@ -508,8 +531,6 @@ export function PlayPaint() {
           >
             <canvas
               ref={canvasRef}
-              width={CANVAS_WIDTH}
-              height={CANVAS_HEIGHT}
               onMouseDown={startDrawing}
               onMouseMove={draw}
               onMouseUp={stopDrawing}
@@ -550,7 +571,7 @@ export function PlayPaint() {
             </span>
             <div className="flex items-center gap-3 text-xs">
               <span className="px-2 py-1 bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 rounded-md border border-gray-200 text-xs">
-                {CANVAS_WIDTH} × {CANVAS_HEIGHT} px
+                {canvasRef.current?.width || 0} × {canvasRef.current?.height || 0} px
               </span>
               <span className="px-2 py-1 bg-gradient-to-r from-purple-600/5 via-blue-500/5 to-cyan-400/5 rounded-md border border-gray-200 text-xs">
                 {history.length} states
