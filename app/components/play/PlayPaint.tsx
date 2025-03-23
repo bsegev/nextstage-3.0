@@ -68,62 +68,119 @@ export function PlayPaint() {
     const context = canvas.getContext('2d');
     if (!context) return;
     
-    // Update canvas dimensions based on actual container size
-    const updateCanvasDimensions = () => {
+    // Set up context reference first
+    contextRef.current = context;
+    
+    // Initialize canvas only once when we don't have a history yet
+    const initializeCanvas = () => {
+      // Set initial canvas dimensions
       if (canvasContainerRef.current) {
         const containerWidth = canvasContainerRef.current.clientWidth;
         const containerHeight = canvasContainerRef.current.clientHeight;
-        
-        // Use an aspect ratio that matches the container
         const aspectRatio = containerWidth / containerHeight;
         
-        // Set canvas internal dimensions to match container's aspect ratio
-        // but keep resolution high for quality
+        // Set initial dimensions based on device
         if (isMobile) {
-          // Lower resolution for mobile to improve performance
           canvas.width = Math.round(1200 * aspectRatio);
           canvas.height = 1200;
         } else {
           canvas.width = Math.round(1800 * aspectRatio);
           canvas.height = 1800;
         }
+      }
+      
+      // Fill with white background
+      context.fillStyle = '#FFFFFF';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Save initial state
+      const initialState = context.getImageData(0, 0, canvas.width, canvas.height);
+      setHistory([initialState]);
+      setCurrentStep(0);
+    };
+    
+    // Adjust canvas dimensions on resize while preserving content
+    const updateCanvasDimensions = () => {
+      if (canvasContainerRef.current && history.length > 0) {
+        // Get current drawing data
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         
-        // Clear and redraw content if we had any
-        if (history.length > 0 && currentStep >= 0) {
-          context.putImageData(history[currentStep], 0, 0);
+        // Update dimensions
+        const containerWidth = canvasContainerRef.current.clientWidth;
+        const containerHeight = canvasContainerRef.current.clientHeight;
+        const aspectRatio = containerWidth / containerHeight;
+        
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        
+        // Calculate new dimensions
+        let newWidth, newHeight;
+        if (isMobile) {
+          newWidth = Math.round(1200 * aspectRatio);
+          newHeight = 1200;
         } else {
-          // Initial state
-          context.fillStyle = '#FFFFFF';
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          
-          // Save initial state
-          const initialState = context.getImageData(0, 0, canvas.width, canvas.height);
-          setHistory([initialState]);
-          setCurrentStep(0);
+          newWidth = Math.round(1800 * aspectRatio);
+          newHeight = 1800;
         }
+        
+        // Create a temporary canvas to hold current drawing
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = oldWidth;
+        tempCanvas.height = oldHeight;
+        const tempContext = tempCanvas.getContext('2d');
+        if (!tempContext) return;
+        tempContext.putImageData(imageData, 0, 0);
+        
+        // Resize main canvas
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        
+        // Clear and put back the content, scaled appropriately
+        context.fillStyle = '#FFFFFF';
+        context.fillRect(0, 0, newWidth, newHeight);
+        context.drawImage(tempCanvas, 0, 0, oldWidth, oldHeight, 0, 0, newWidth, newHeight);
+        
+        // Update history
+        const newState = context.getImageData(0, 0, newWidth, newHeight);
+        setHistory(prev => {
+          const newHistory = [...prev];
+          newHistory[currentStep] = newState;
+          return newHistory;
+        });
       }
     };
     
-    // Set up context
-    contextRef.current = context;
+    // Initialize if we don't have a history yet
+    if (history.length === 0) {
+      initializeCanvas();
+    } else {
+      // Otherwise update dimensions and restore state
+      updateCanvasDimensions();
+    }
     
-    // Initial setup
-    updateCanvasDimensions();
+    // Set event listener for window resize
+    const handleResize = () => {
+      // Debounce the resize operation
+      if ((window as any).resizeTimeout) {
+        clearTimeout((window as any).resizeTimeout);
+      }
+      
+      (window as any).resizeTimeout = setTimeout(() => {
+        updateCanvasDimensions();
+      }, 200);
+    };
     
-    // Update dimensions on resize
-    window.addEventListener('resize', updateCanvasDimensions);
+    window.addEventListener('resize', handleResize);
     
     // Cleanup function
     return () => {
-      window.removeEventListener('resize', updateCanvasDimensions);
+      window.removeEventListener('resize', handleResize);
       if (context) {
         context.clearRect(0, 0, canvas.width, canvas.height);
       }
       contextRef.current = null;
-      setHistory([]);
-      setCurrentStep(-1);
     };
-  }, [isMobile, history, currentStep]);
+  }, [isMobile, history.length]);
 
   const saveToHistory = () => {
     // Ensure we're on the client side
@@ -220,12 +277,19 @@ export function PlayPaint() {
       return;
     }
 
+    // Get precise coordinates scaled correctly to the canvas internal dimensions
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
     
     context.beginPath();
     context.moveTo(x, y);
+    context.lineWidth = tool === 'eraser' ? 30 : 4;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    context.strokeStyle = tool === 'eraser' ? '#FFFFFF' : color;
     setIsDrawing(true);
   };
 
@@ -236,15 +300,14 @@ export function PlayPaint() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
+    // Get precise coordinates scaled correctly to the canvas internal dimensions
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
     
     context.lineTo(x, y);
-    context.strokeStyle = tool === 'eraser' ? '#FFFFFF' : color;
-    context.lineWidth = tool === 'eraser' ? 30 : 4;
-    context.lineCap = 'round';
-    context.lineJoin = 'round';
     context.stroke();
   };
 
@@ -263,13 +326,20 @@ export function PlayPaint() {
       return;
     }
 
+    // Get precise coordinates scaled correctly to the canvas internal dimensions
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (touch.clientX - rect.left) * scaleX;
+    const y = (touch.clientY - rect.top) * scaleY;
     
     context.beginPath();
     context.moveTo(x, y);
+    context.lineWidth = tool === 'eraser' ? 30 : 4;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    context.strokeStyle = tool === 'eraser' ? '#FFFFFF' : color;
     setIsDrawing(true);
   };
 
@@ -281,16 +351,15 @@ export function PlayPaint() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
+    // Get precise coordinates scaled correctly to the canvas internal dimensions
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (touch.clientX - rect.left) * scaleX;
+    const y = (touch.clientY - rect.top) * scaleY;
     
     context.lineTo(x, y);
-    context.strokeStyle = tool === 'eraser' ? '#FFFFFF' : color;
-    context.lineWidth = tool === 'eraser' ? 30 : 4;
-    context.lineCap = 'round';
-    context.lineJoin = 'round';
     context.stroke();
   };
 
