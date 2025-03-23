@@ -4,7 +4,7 @@ import { Paintbrush, Eraser, Save, ArrowLeft, ArrowRight, Trash, PaintBucket } f
 
 const MAX_HISTORY = 20; // Limit history size to prevent memory bloat
 const CANVAS_WIDTH = 1800;
-const CANVAS_HEIGHT = 1800;
+const CANVAS_HEIGHT = 900; // Changed from 1800 to 900 for a 2:1 aspect ratio
 
 const colors = [
   '#000000', '#808080', '#800000', '#808000', '#008000', '#008080', '#000080', '#800080', '#808040', '#004040', '#0080FF', '#004080', '#8000FF', '#804000',
@@ -29,6 +29,9 @@ export function PlayPaint() {
 
   // Check if device is mobile and adjust canvas height
   useEffect(() => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
@@ -58,6 +61,9 @@ export function PlayPaint() {
 
   // Initialize canvas and context
   useEffect(() => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     
@@ -83,6 +89,9 @@ export function PlayPaint() {
   }, []);
 
   const saveToHistory = () => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
     const context = contextRef.current;
     if (!context) return;
 
@@ -97,6 +106,9 @@ export function PlayPaint() {
   };
 
   const undo = () => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
     if (currentStep > 0) {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -110,6 +122,9 @@ export function PlayPaint() {
   };
 
   const redo = () => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
     if (currentStep < history.length - 1) {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -123,16 +138,41 @@ export function PlayPaint() {
   };
 
   const saveCanvas = () => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     
+    // Get the canvas context
+    const context = canvas.getContext('2d');
+    if (!context) return;
+    
+    // Get the current image data from the original canvas
+    const imageData = context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    
+    // Create a new canvas with the exact dimensions of our drawing canvas
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = CANVAS_WIDTH;
+    exportCanvas.height = CANVAS_HEIGHT;
+    const exportContext = exportCanvas.getContext('2d');
+    
+    if (!exportContext) return;
+    
+    // Put the image data directly onto the export canvas
+    exportContext.putImageData(imageData, 0, 0);
+    
+    // Create download link with the export canvas data
     const link = document.createElement('a');
     link.download = 'my-painting.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = exportCanvas.toDataURL('image/png');
     link.click();
   };
 
   const clearCanvas = () => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext('2d');
