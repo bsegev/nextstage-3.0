@@ -82,6 +82,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "shimmer": "shimmer 3s infinite ease-in-out",
       },
+      boxShadow: {
+        glow: "0 0 20px rgba(59, 130, 246, 0.4)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

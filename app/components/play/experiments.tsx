@@ -8,6 +8,7 @@ import { ArrowRight, FolderPlus, X, Paintbrush } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { LinkPreview } from "@/components/ui/link-preview";
+import { Button } from "@/components/ui/button";
 
 const PlayCodeCompare = dynamic(() => import('./PlayCodeCompare').then(mod => ({ default: mod.PlayCodeCompare })), {
   ssr: false,
@@ -29,11 +30,11 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredLink, allLink, thumbnails = [], children }) => {
   return (
-    <div className="bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-      <div className="p-6">
+    <div className="h-full bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+      <div className="p-6 h-full flex flex-col">
         {/* Header */}
         <div className="mb-6">
-          <h3 className="text-xl md:text-2xl md:leading-snug text-gray-800 font-serif mb-3">
+          <h3 className="text-xl md:text-2xl md:leading-snug text-gray-800 font-serif font-bold mb-3">
             {title}
           </h3>
           <p className="text-sm md:text-base text-gray-600 leading-relaxed">
@@ -42,7 +43,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
         </div>
 
         {/* Content Area */}
-        <div className="relative mb-6 bg-gradient-to-br from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02] rounded-xl overflow-hidden">
+        <div className="relative mb-6 bg-gradient-to-br from-purple-600/[0.02] via-blue-500/[0.02] to-cyan-400/[0.02] rounded-xl overflow-hidden flex-grow">
           {children}
         </div>
 
@@ -66,7 +67,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
               : "View featured projects and experiments in this category."}
             thumbnailUrl={thumbnails?.[0]}
           >
-            <div className="group relative px-6 py-4 bg-gray-800 hover:bg-gray-900 transition-all duration-300 rounded-xl overflow-hidden shadow-md text-center cursor-pointer">
+            <div className="group relative px-6 py-4 bg-[#2b3036] hover:bg-[#2b3036]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-md text-center cursor-pointer">
               <span className="relative z-10 font-mono text-base text-white flex items-center justify-center gap-2">
                 <span>
                   {title === "Better LLM Prompting" ? "Get the Book" :
@@ -121,12 +122,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
                   setTimeout(() => tooltip.remove(), 300);
                 }, 2000);
               }}
-              className="group relative px-6 py-4 bg-white hover:bg-gray-50 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-gray-200 text-center cursor-help"
+              className="group relative px-6 py-4 bg-white hover:bg-white/90 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-gray-200 text-center cursor-help"
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
               <span className="relative z-10 font-mono text-base text-gray-800 flex items-center justify-center gap-2">
                 <span>
                   {title === "Better LLM Prompting" ? "Explore Resources" :
@@ -383,42 +380,16 @@ export function PlayExperiments() {
               className="max-w-2xl mb-32 mx-auto sm:mx-0 text-center sm:text-left"
             >
               {/* Label */}
-              <motion.div 
-                className="inline-flex items-center gap-2 sm:gap-3 mb-6 mx-auto sm:mx-0"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <motion.div 
-                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-blue-500/80 to-purple-500/80"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "2rem" }}
-                  transition={{ duration: 0.8 }}
-                />
-                <span className="font-mono text-xs sm:text-sm tracking-wider text-gray-600 uppercase">
-                  Experimental Lab
-                </span>
-                <motion.div 
-                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-purple-500/80 to-cyan-400/80"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "2rem" }}
-                  transition={{ duration: 0.8 }}
-                />
-              </motion.div>
+              <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm mb-6">
+                Experimental Lab
+              </div>
 
               {/* Main Heading with Gradient */}
               <div className="relative mb-6 sm:mb-8">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-gray-800">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-gray-800 font-bold leading-tight">
                   Creative Playground{' '}
-                  <span className="block mt-2 sm:mt-3">
-                    <span className="animated-gradient relative">
-                      & Digital Experiments
-                      <motion.span
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400"
-                        initial={{ scaleX: 0, opacity: 0 }}
-                        whileInView={{ scaleX: 1, opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                      />
-                    </span>
+                  <span className="block mt-4 sm:mt-5">
+                     <span className="animated-gradient">& Digital Experiments</span>
                   </span>
                 </h2>
               </div>
@@ -438,6 +409,7 @@ export function PlayExperiments() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="h-full"
                 >
                   <FeatureCard
                     title={feature.title}
@@ -449,12 +421,58 @@ export function PlayExperiments() {
                     {feature.content}
                   </FeatureCard>
                 </motion.div>
-                ))}
+              ))}
             </div>
           </div>
         </div>
       </section>
+      
       <PlayCodeCompare />
+      
+      {/* CTA Section */}
+      <section className="w-full py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        <div className="container px-4 md:px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <div className="inline-block rounded-lg bg-gradient-to-r from-purple-600/10 via-blue-500/10 to-cyan-400/10 px-3 py-1 text-sm mb-4">
+              Join the Creative Lab
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-serif">
+              Ready to bring your own
+              <span className="block mt-2 sm:mt-3">
+                <span className="animated-gradient">ideas to life</span>?
+              </span>
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground">
+              Whether you have a project in mind or just want to collaborate on something experimental, let's connect and build something extraordinary together.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white hover:scale-[1.02] transition-transform duration-300 font-bold text-lg px-8 py-7 shadow-lg shadow-purple-600/20 hover:shadow-xl hover:shadow-purple-600/30 w-full sm:w-auto"
+                >
+                  Start Creating <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/play/gallery">
+                <Button 
+                  size="lg"
+                  className="inline-flex items-center justify-center px-8 py-7 text-base font-bold rounded-lg bg-transparent text-blue-600 hover:bg-blue-500 hover:text-white hover:scale-[1.02] transition-all duration-300 border border-blue-200 hover:border-blue-500 shadow-sm hover:shadow-lg hover:shadow-blue-500/20 w-full sm:w-auto"
+                >
+                  See More Experiments
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 } 

@@ -1,83 +1,83 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Tooltip } from './tooltip';
+import * as HoverCard from "@radix-ui/react-hover-card";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
-export interface LinkPreviewProps {
+interface LinkPreviewProps {
   url: string;
+  children: React.ReactNode;
+  className?: string;
+  thumbnailUrl?: string;
   title?: string;
   description?: string;
-  thumbnailUrl?: string;
   disabled?: boolean;
-  children: React.ReactNode;
 }
 
 export function LinkPreview({
   url,
+  children,
+  className = "",
+  thumbnailUrl,
   title,
   description,
-  thumbnailUrl,
-  disabled = false,
-  children,
+  disabled = false
 }: LinkPreviewProps) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = (e: React.MouseEvent) => {
-    if (disabled) {
-      e.preventDefault();
-      return;
-    }
-    
-    setIsClicked(true);
-    
-    // Navigate to URL 
-    window.open(url, "_blank", "noopener,noreferrer");
-    
-    // Reset click state after animation
-    setTimeout(() => {
-      setIsClicked(false);
-    }, 500);
-  };
-
-  const renderTooltipContent = () => {
-    return (
-      <div className="w-full">
-        {thumbnailUrl && (
-          <div className="aspect-video w-full mb-2 rounded-md overflow-hidden bg-gray-100">
-            <div 
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${thumbnailUrl})` }}
-            />
-          </div>
-        )}
-        
-        {title && (
-          <h4 className="font-medium text-gray-900 mb-1 truncate">
-            {title}
-          </h4>
-        )}
-        
-        {description && (
-          <p className="text-gray-500 text-xs line-clamp-2">
-            {description}
-          </p>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div 
-      className={`relative ${isClicked ? 'scale-95' : 'scale-100'} transition-transform duration-300`}
-      onClick={handleClick}
-    >
-      {disabled ? (
-        <div>{children}</div>
-      ) : (
-        <Tooltip content={renderTooltipContent()}>
-          <div className="cursor-pointer">{children}</div>
-        </Tooltip>
-      )}
-    </div>
+    <HoverCard.Root openDelay={0} closeDelay={0}>
+      <HoverCard.Trigger asChild>
+        {disabled ? (
+          <div className={className}>
+            {children}
+          </div>
+        ) : (
+          <a
+            href={url}
+            className={className}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {children}
+          </a>
+        )}
+      </HoverCard.Trigger>
+      <HoverCard.Portal>
+        <HoverCard.Content 
+          sideOffset={5} 
+          className="z-[9999]"
+          style={{
+            position: 'relative',
+            zIndex: 9999
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="bg-white rounded-xl shadow-xl border border-gray-200 p-4 w-80 relative z-[9999]"
+          >
+            {thumbnailUrl && (
+              <div className="w-full aspect-video rounded-lg overflow-hidden mb-3 bg-gray-100">
+                <Image
+                  src={thumbnailUrl}
+                  alt={title || "Preview"}
+                  width={320}
+                  height={180}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div className="space-y-2">
+              <h3 className="font-medium text-gray-800">{title || url}</h3>
+              {description && (
+                <p className="text-sm text-gray-600 line-clamp-2">
+                  {description}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        </HoverCard.Content>
+      </HoverCard.Portal>
+    </HoverCard.Root>
   );
 } 

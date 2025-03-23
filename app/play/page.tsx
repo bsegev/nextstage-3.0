@@ -3,7 +3,7 @@ import { PlayExperiments } from "@/app/components/play/experiments"
 
 export default function PlayPage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="overflow-hidden">
       <PlayHero />
       <PlayExperiments />
     </main>
